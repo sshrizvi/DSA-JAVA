@@ -21,7 +21,7 @@
 Note : Java is statically typed which means that we can use a variable only if it is declared earlier in the program.
     
 For Example : 
-```java Statically Typed
+```java {data-filename = "staticallyTyped.java"}
 
 // This is wrong.
 age = 20;
