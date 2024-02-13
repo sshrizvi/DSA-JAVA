@@ -52,7 +52,7 @@ There are two types of data types in Java :
 1. Primitive Data Types
 2. Non-Primitive Data Types (a.k.a Reference)
 
-<div align='center'>
+
 |DataType|Size|
 |--|--|
 |boolean|1 bit|
@@ -63,7 +63,6 @@ There are two types of data types in Java :
 |char|2 byte|
 |float|4 byte|
 |double|8 byte|
-</div>
 
 ```mermaid 
 
