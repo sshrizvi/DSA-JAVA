@@ -17,10 +17,11 @@
 #### Example
 `age = 20;`
 
-> Note : Java is statically typed which means that we can use a variable only if it is declared earlier in the program.
+!!! :zap: Important :zap:
+Note : Java is statically typed which means that we can use a variable only if it is declared earlier in the program.
     
 For Example : 
-```java
+```java Statically Typed
 
 // This is wrong.
 age = 20;
@@ -30,6 +31,7 @@ int age;
 int age;
 age = 20;
 ```
+!!!
 
 ### c. Rules for naming variables in Java
 
@@ -45,8 +47,24 @@ Example : `int s;`, `int a;` -> These names are not meaningful but valid.
           `int speed;`, `int age;` -> These names are meaningful and valid too.
 
 ## 2. Data Types
+> Data types are used to specify the size and value that can be stored in a variable.  
 
-```mermaid
+There are two types of data types in Java :  
+1. Primitive Data Types
+2. Non-Primitive Data Types (a.k.a Reference)
+
+|DataType|Size|
+|--|--|
+|boolean|1 bit|
+|byte|1 byte|
+|short|2 byte|
+|int|4 byte|
+|long|8 byte|
+|char|2 byte|
+|float|4 byte|
+|double|8 byte|
+
+```mermaid Data Types in Java
 
 flowchart TD
     A(Datatypes) --> B(Primitive)
@@ -70,3 +88,10 @@ flowchart TD
     C(Non Primitve) --> T(etc.)
 
 ```
+
+## 3. Comments
+> Comments are sections of a program that are completely ignored by the compiler. These are generally used to properly define our segments of program right there in the code.  
+
+There are two types of comments generally used in Java:  
+1. Single line comments. `//This is a single line comment.`
+2. Multiline comments. `/*This is a multiline comment.*/`
