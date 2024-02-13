@@ -19,4 +19,13 @@
 
 > Note
     : Java is statically typed which means that we can use a variable only if it is declared earlier in the program.
-    
+    For Example : 
+    ```
+    // This is wrong.
+    age = 20;
+    int age;
+
+    //This is correct.
+    int age;
+    age = 20;
+    ```
