@@ -17,15 +17,15 @@
 #### Example
 `age = 20;`
 
-> Note
-    : Java is statically typed which means that we can use a variable only if it is declared earlier in the program.
-    For Example : 
-    ```
-    // This is wrong.
-    age = 20;
-    int age;
+> Note : Java is statically typed which means that we can use a variable only if it is declared earlier in the program.
+    
+For Example : 
+```
+/* This is wrong */
+age = 20;
+int age;
 
-    //This is correct.
-    int age;
-    age = 20;
-    ```
+/* This is right */
+int age;
+age = 20;
+```
