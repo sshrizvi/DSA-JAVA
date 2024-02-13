@@ -17,11 +17,11 @@
 #### Example
 `age = 20;`
 
-!!! :zap: Important :zap:
-Note : Java is statically typed which means that we can use a variable only if it is declared earlier in the program.
+:zap: Note :zap:  
+Java is statically typed which means that we can use a variable only if it is declared earlier in the program.
     
 For Example : 
-```java {data-filename = "staticallyTyped.java"}
+```java 
 
 // This is wrong.
 age = 20;
@@ -31,7 +31,6 @@ int age;
 int age;
 age = 20;
 ```
-!!!
 
 ### c. Rules for naming variables in Java
 
@@ -64,7 +63,7 @@ There are two types of data types in Java :
 |float|4 byte|
 |double|8 byte|
 
-```mermaid Data Types in Java
+```mermaid 
 
 flowchart TD
     A(Datatypes) --> B(Primitive)
