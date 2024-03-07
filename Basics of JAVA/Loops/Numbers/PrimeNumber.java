@@ -1,5 +1,3 @@
-package Loops.Numbers;
-
 import java.util.Scanner;
 
 public class PrimeNumber {
