@@ -6,7 +6,8 @@
       - [Question 01 : Largest Element in Array](#question-01--largest-element-in-array)
       - [Question 02 : Check If the Array is Sorted \& Rotated](#question-02--check-if-the-array-is-sorted--rotated)
       - [Question 03 : Second Largest Element in Array without Sorting](#question-03--second-largest-element-in-array-without-sorting)
-      - [Question 04 : Linear Search](#question-04--linear-search)
+      - [Question 04 : Searching an Element in a Sorted Array](#question-04--searching-an-element-in-a-sorted-array)
+      - [Question 05 : Rotate Array](#question-05--rotate-array)
 
 
 # Coding Questions
@@ -120,4 +121,67 @@ int print2largest(int arr[], int n) {
 ```
 ---
 
-#### Question 04 : [Linear Search]()
+#### Question 04 : [Searching an Element in a Sorted Array](https://www.geeksforgeeks.org/problems/who-will-win-1587115621/0)
+
+> :bulb: **Intuition (*Optimal*)** :white_check_mark:
+> - Since the given array is sorted, we can implement the Binary Search algorithm to find the target element.
+> - For detail, [Click Here](https://youtu.be/C2apEw9pgtw?feature=shared)
+> - **Time Complexity :** $O(\log n)$
+
+**Syed's Code (*Optimal*)** [View Full Code](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/SearchingInSortedArray.java)
+```java
+static int searchInSorted(int arr[], int N, int K){
+        int l = 0;
+        int r = N-1;
+        int mid = (l+r)/2;
+        
+        while(l <= r){
+
+            if(arr[mid] == K) return 1;
+
+            else if(arr[mid] < K){
+                l = mid+1;
+                mid = (l+r)/2;
+            }
+            else{
+                r = mid-1;
+                mid = (l+r)/2;
+            }
+        }
+        return -1;
+    }
+```
+---
+#### Question 05 : [Rotate Array](https://leetcode.com/problems/rotate-array/description/)
+
+> :bulb: **Intuition (*Optimal*)** :white_check_mark:
+> - Considering reversing the array might lead you to a solution for this problem.  
+> 
+> :tip: **Approach** :smiley:
+> 1. First, it calculates the effective rotation amount by taking the modulus of k with the length of the array, ensuring that k is within the range of the array length.
+> 2. Then, it calls the reverse function three times:
+>       - First, it reverses the entire array, effectively placing the last k elements at the start of the array.
+>       - Second, it reverses the first k elements, moving them to the end of the array.
+>       - Finally, it reverses the remaining elements, restoring the original order of the array with the elements rotated to the right by k steps.
+> - **Time Complexity :** $O(n)$
+
+**Optimal Solution** [View Full Code](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/RotateArray.java)
+```java
+public void rotate(int[] nums, int k) {
+        k = k % nums.length;
+        reverseArray(nums,0,nums.length-1);
+        reverseArray(nums,0,k-1);
+        reverseArray(nums,k,nums.length-1);
+    }
+    public static void reverseArray(int[] nums, int start, int end) {
+        int temp;
+        while(start < end){
+            temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
+            start++;
+            end--;
+        }
+    }
+```
+---
