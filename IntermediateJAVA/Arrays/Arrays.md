@@ -402,16 +402,14 @@ class Solution {
 > 
 > To solve this problem, we can use the mathematical formula for the sum of the first `n` natural numbers:
 >
-> \[
-> \text{Sum}_{\text{expected}} = \frac{n \cdot (n + 1)}{2}
-> \]
+> $$\text{Sum}_{\text{expected}} = \frac{n \cdot (n + 1)}{2}$$
 >
 > ### 🧠 Intuition
 > 
 > - **Given**: An array `nums` of length `n` containing numbers from `0` to `n` with one missing.
 > - **Objective**: Find the missing number.
 > - **Approach**:
->   1. **Calculate the expected sum** of the first `n` natural numbers using the formula: \(\frac{n \cdot (n + 1)}{2}\).
+>   1. **Calculate the expected sum** of the first `n` natural numbers using the formula: $\frac{n \cdot (n + 1)}{2}$.
 >   2. **Calculate the actual sum** of the elements in the array.
 >   3. **The difference** between the expected sum and the actual sum is the missing number.
 > 
@@ -424,7 +422,7 @@ class Solution {
 > 2. **Calculate the sum** of the array elements:
 >    - Iterate through each element in the array and add it to `sum`.
 > 
-> 3. **Calculate the expected sum** using the formula \(\frac{n \cdot (n + 1)}{2}\).
+> 3. **Calculate the expected sum** using the formula $\frac{n \cdot (n + 1)}{2}$.
 > 
 > 4. **Find the missing number** by subtracting the actual sum from the expected sum.
 > 
@@ -433,11 +431,11 @@ class Solution {
 > - **Example**:
 >   - Given array: `[3, 0, 1]`
 >   - Length of the array `n = 3`
->   - Expected sum: \(\frac{3 \cdot (3 + 1)}{2} = 6\)
->   - Actual sum: \(3 + 0 + 1 = 4\)
->   - Missing number: \(6 - 4 = 2\)
+>   - Expected sum: $\frac{3 \cdot (3 + 1)}{2} = 6$
+>   - Actual sum: $3 + 0 + 1 = 4$
+>   - Missing number: $6 - 4 = 2$
 > 
-> ### 📜 Code Explanation [View Full Code](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/MissingNumber.java)
+> ### 📜 Code Explanation
 > 
 > ```java
 > public class Solution {
@@ -452,7 +450,7 @@ class Solution {
 > }
 > ```
 >
-> This code efficiently computes the missing number by leveraging the properties of arithmetic sums, ensuring a time complexity of \(O(n)\) and a space complexity of \(O(1)\).
+> This code efficiently computes the missing number by leveraging the properties of arithmetic sums, ensuring a time complexity of $O(n)$ and a space complexity of $O(1)$.
 
 > ### Flowchart
 > 
