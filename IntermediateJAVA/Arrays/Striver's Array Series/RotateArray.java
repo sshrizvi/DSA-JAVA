@@ -17,6 +17,24 @@ public class RotateArray {
             end--;
         }
     }
+    public static void rotate(int[] nums, int k) {
+        int n = nums.length;
+        k = k % n;  // In case k is larger than the array length
+        
+        int count = 0;  // Number of elements placed in correct position
+        for (int start = 0; count < n; start++) {
+            int current = start;
+            int prev = nums[start];
+            do {
+                int next = (current + k) % n;
+                int temp = nums[next];
+                nums[next] = prev;
+                prev = temp;
+                current = next;
+                count++;
+            } while (start != current);
+        }
+    }
     public static void rotateArray(int[] arr, int k){
         //Reducing very large value of k to range between [0,arr.length-1]
         k = k % arr.length;

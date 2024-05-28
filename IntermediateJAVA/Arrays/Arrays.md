@@ -8,6 +8,9 @@
       - [Question 03 : Second Largest Element in Array without Sorting](#question-03--second-largest-element-in-array-without-sorting)
       - [Question 04 : Searching an Element in a Sorted Array](#question-04--searching-an-element-in-a-sorted-array)
       - [Question 05 : Rotate Array](#question-05--rotate-array)
+      - [Question 06 : Maximum Consecutive Ones](#question-06--maximum-consecutive-ones)
+      - [Question 07 : Move Zeroes](#question-07--move-zeroes)
+      - [Question 08 : Remove Duplicates from Sorted Array](#question-08--remove-duplicates-from-sorted-array)
 
 
 # Coding Questions
@@ -17,7 +20,7 @@
 ### Day 1 - Basic
 #### Question 01 : [Largest Element in Array](https://www.geeksforgeeks.org/problems/largest-element-in-array4009/0)
 
-> **Intuition**
+> :bulb: **Intuition** :white_check_mark:
 > - We can use a `max` variable to solve the given problem.
 > - The idea is simple, we assume that first element of array is the largest one.
 > - Then start traversing the array and at each step checking that our variable is greater or not.
@@ -157,7 +160,7 @@ static int searchInSorted(int arr[], int N, int K){
 > :bulb: **Intuition (*Optimal*)** :white_check_mark:
 > - Considering reversing the array might lead you to a solution for this problem.  
 > 
-> :tip: **Approach** :smiley:
+>  **Approach** :smiley:
 > 1. First, it calculates the effective rotation amount by taking the modulus of k with the length of the array, ensuring that k is within the range of the array length.
 > 2. Then, it calls the reverse function three times:
 >       - First, it reverses the entire array, effectively placing the last k elements at the start of the array.
@@ -185,3 +188,202 @@ public void rotate(int[] nums, int k) {
     }
 ```
 ---
+#### Question 06 : [Maximum Consecutive Ones](https://leetcode.com/problems/max-consecutive-ones/description/)
+
+> :bulb: **Intuition** :white_check_mark:
+> - The idea is very simple, we will use two variables `consOnes` for storing the current number of consecutive ones, and `prevConsOnes` for storing the previous number of consecutive ones. At the end of the iteration, `max(consOnes,prevConsOnes)` will give the result.
+>
+> **Approach :** :smiley:
+> - Traverse the array.
+> - At each iteration, if element is `1`, increment the `consOnes`.
+> - If element is `0`, then -
+>   - If `prevConsOnes < consOnes`, then - 
+>       - `prevConsOnes = consOnes`
+>   - Resest the `consOnes` to `0`.
+> - After completion of iteration, `return max(consOnes,prevConsOnes)`.
+>
+> **Time Complexity :** $O(n)$
+
+**Syed's Solution (*Optimal*)**
+[View Full Code](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/MaximumConsecutiveOnes.java)
+
+```java
+public static int findMaxConsecutiveOnes(int[] nums) {
+        int consOnes = 0;
+        int prevConsOnes = 0;
+        for(int i = 0; i < nums.length; i++){
+            if(nums[i] == 1){
+                consOnes++;
+            }
+            else{
+                if(prevConsOnes < consOnes){
+                    prevConsOnes = consOnes;
+                }
+                consOnes = 0;
+            }
+        }
+        if(prevConsOnes < consOnes){
+            return consOnes;
+        }
+        else{
+            return prevConsOnes;
+        }
+    }
+```
+---
+#### Question 07 : [Move Zeroes](https://leetcode.com/problems/move-zeroes/)
+
+> :bulb: **Intuition** :white_check_mark:
+> - We will use two pointers to solve the problem effectively.
+>
+> **Approach :** :smiley:
+> - Initialize `l = 0;` and `r = n-1;`
+> - Run a Loop while `l <= r`.
+>   - If the element at current iteration is `0` i.e. `nums[l] == 0`, then -
+>       - Shift the elements towards left in the range `[l+1,r]`
+>       - Place `0` at nums[r];
+>       - Decrement `r` by `1`.
+>   - If the element at current iteration is non-zero, then -
+>       - Increment the `l` by `1`.
+> - **Time Complexity :** $O(n^3/2)$
+>
+> **Approach (*Optimal*)** :white_check_mark:
+> - We will use two pointers.
+> - One pointer `i` tracks the position for the next non-zero element, while the other pointer `l` scans the array. When `nums[i]` is `0` and `nums[l]` is `non-zero`, the elements are swapped.
+> - **Time Complexity :** $O(n)$
+
+**Syed's Code**
+[View Full Code](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/MoveZeroes.java)
+```java
+public void moveZeroes(int[] nums) {
+        int l = 0;
+        int r = nums.length-1;
+        while(l <= r){
+            if(nums[l] == 0){
+                //Shifting
+                for(int i = l; i < r; i++){
+                    nums[i] = nums[i+1];
+                }
+                //Placing Zero at the end
+                nums[r] = 0;
+                r--;
+            }
+            else{
+                l++;
+            }
+        }
+    }
+```
+
+**Optimized Code** :white_check_mark:
+```java
+class Solution {
+    public void moveZeroes(int[] nums) {
+        int i = 0;
+        for(int l = 1; l < nums.length; l++){
+            if(nums[i] != 0){
+                i++;
+            }
+            else {
+                if(nums[l] != 0){
+                    int temp=nums[i];
+                    nums[i]=nums[l];
+                    nums[l]=temp;
+                    i++;
+                }
+            }
+        }
+    }
+}
+```
+---
+#### Question 08 : [Remove Duplicates from Sorted Array](https://leetcode.com/problems/remove-duplicates-from-sorted-array/description/)
+
+> ### 💡 Intuition and Approach
+>
+> The problem at hand is to remove duplicates from a sorted array `nums` and return the new length of the array after removal, ensuring each element appears only once. The modified array should have the unique elements in the first part of the array, and it doesn't matter what you leave beyond the new length.
+>
+> Given the array is sorted, all duplicates are adjacent. This property can be leveraged to efficiently solve the problem in-place with \(O(n)\) time complexity and \(O(1)\) additional space complexity.
+>
+> ### 🧠 Intuition
+>
+> - Since the array is sorted, duplicates are contiguous.
+> - We can maintain a pointer (`k`) that keeps track of the position of the last unique element encountered.
+> - By iterating through the array and comparing the current element with the last unique element (`nums[k]`), we can identify if the current element is a duplicate.
+> - If it's not a duplicate, increment `k` and update `nums[k]` with the current element.
+>
+> ### 📝 Approach
+>
+> 1. **Initialization**:
+>    - Start with a pointer `k` at position 0, which will track the index of the last unique element in the array.
+>
+> 2. **Iteration**:
+>    - Loop through the array starting from the first element.
+>    - For each element `nums[i]`:
+>      - Compare it with `nums[k]` (the last unique element).
+>      - If they are different, it means `nums[i]` is a new unique element:
+>        - Increment `k` to move to the next position for storing this new unique element.
+>        - Assign `nums[i]` to `nums[k]`.
+>
+> 3. **Completion**:
+>    - After processing all elements, the first `k + 1` elements of the array `nums` will be unique.
+>    - The value `k + 1` represents the new length of the array after removing duplicates.
+>
+> ### 🔍 Detailed Walkthrough
+>
+> Let's walk through an example to clarify:
+>
+> Consider the input array: `nums = [1, 1, 2, 2, 3, 4, 4, 5]`.
+>
+> - Start with `k = 0`. The first element `nums[0]` is always unique, so it stays in place.
+>
+> - Loop through the array:
+>   - `i = 1`: `nums[1]` (1) is equal to `nums[k]` (1). It's a duplicate, so continue to the next element.
+>   - `i = 2`: `nums[2]` (2) is different from `nums[k]` (1). Increment `k` to 1 and set `nums[1]` to `nums[2]`. Now `nums` looks like `[1, 2, 2, 2, 3, 4, 4, 5]`.
+>   - `i = 3`: `nums[3]` (2) is equal to `nums[k]` (2). It's a duplicate, so continue to the next element.
+>   - `i = 4`: `nums[4]` (3) is different from `nums[k]` (2). Increment `k` to 2 and set `nums[2]` to `nums[4]`. Now `nums` looks like `[1, 2, 3, 2, 3, 4, 4, 5]`.
+>   - `i = 5`: `nums[5]` (4) is different from `nums[k]` (3). Increment `k` to 3 and set `nums[3]` to `nums[5]`. Now `nums` looks like `[1, 2, 3, 4, 3, 4, 4, 5]`.
+>   - `i = 6`: `nums[6]` (4) is equal to `nums[k]` (4). It's a duplicate, so continue to the next element.
+>   - `i = 7`: `nums[7]` (5) is different from `nums[k]` (4). Increment `k` to 4 and set `nums[4]` to `nums[7]`. Now `nums` looks like `[1, 2, 3, 4, 5, 4, 4, 5]`.
+>
+> - The final value of `k` is 4, so the new length is `k + 1 = 5`.
+>
+> ### 📜 Code Explanation
+>
+> ```java
+> public class Solution {
+>     public int removeDuplicates(int[] nums) {
+>         int n = nums.length; // Length of the input array
+>         int k = 0; // Pointer for the position of the last unique element
+>
+>         // Loop through the array starting from the first element
+>         for (int i = 0; i < n; i++) {
+>             // If the current element is different from the last unique element
+>             if (nums[i] != nums[k]) {
+>                 k++; // Increment the pointer for the unique element position
+>                 nums[k] = nums[i]; // Update the next position with the current unique element
+>             }
+>         }
+>
+>         // The length of the array with unique elements is k + 1
+>         return k + 1;
+>     }
+> }
+> ```
+>
+> This code ensures that all unique elements are shifted to the front of the array and returns the new length, effectively removing duplicates in-place.
+> ### Flowchart 
+> ```mermaid
+> graph TD
+>    Start --> CheckEmpty[Is the array empty?]
+>     CheckEmpty -->|Yes| ReturnZero[Return 0]
+>     CheckEmpty -->|No| Initialize[Initialize n = nums.length, k = 0]
+>     Initialize --> Loop[For i from 0 to n-1]
+>     Loop --> Condition[nums[i] != nums[k]]
+>     Condition -->|Yes| IncrementK[k++]
+>     IncrementK --> Update[nums[k] = nums[i]]
+>     Update --> Loop
+>     Condition -->|No| Loop
+>     Loop -->|End of Loop| ReturnK[Return k + 1]
+>     ReturnK --> End[End]
+> ```
