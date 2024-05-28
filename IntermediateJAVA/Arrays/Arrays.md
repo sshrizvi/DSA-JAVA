@@ -372,18 +372,21 @@ class Solution {
 > ```
 >
 > This code ensures that all unique elements are shifted to the front of the array and returns the new length, effectively removing duplicates in-place.
-> ### Flowchart 
+> ### Flowchart for Removing Duplicates from Sorted Array
+>
 > ```mermaid
 > graph TD
->    Start --> CheckEmpty[Is the array empty?]
->     CheckEmpty -->|Yes| ReturnZero[Return 0]
->     CheckEmpty -->|No| Initialize[Initialize n = nums.length, k = 0]
->     Initialize --> Loop[For i from 0 to n-1]
->     Loop --> Condition[nums[i] != nums[k]]
->     Condition -->|Yes| IncrementK[k++]
->     IncrementK --> Update[nums[k] = nums[i]]
+>     Start["Start"] --> CheckEmpty{"Is the array empty?"}
+>     CheckEmpty -->|Yes| ReturnZero["Return 0"]
+>     CheckEmpty -->|No| Initialize["Initialize n = nums.length, k = 0"]
+>     Initialize --> Loop["For i from 0 to n-1"]
+>     Loop --> Condition{"nums[i] != nums[k]"}
+>     Condition -->|Yes| IncrementK["k++"]
+>     IncrementK --> Update["nums[k] = nums[i]"]
 >     Update --> Loop
 >     Condition -->|No| Loop
->     Loop -->|End of Loop| ReturnK[Return k + 1]
->     ReturnK --> End[End]
+>     Loop -->|End of Loop| ReturnK["Return k + 1"]
+>     ReturnK --> End["End"]
 > ```
+>
+---
