@@ -8,9 +8,11 @@
       - [Question 03 : Second Largest Element in Array without Sorting](#question-03--second-largest-element-in-array-without-sorting)
       - [Question 04 : Searching an Element in a Sorted Array](#question-04--searching-an-element-in-a-sorted-array)
       - [Question 05 : Rotate Array](#question-05--rotate-array)
+    - [Day 2 - Easy](#day-2---easy)
       - [Question 06 : Maximum Consecutive Ones](#question-06--maximum-consecutive-ones)
       - [Question 07 : Move Zeroes](#question-07--move-zeroes)
       - [Question 08 : Remove Duplicates from Sorted Array](#question-08--remove-duplicates-from-sorted-array)
+      - [Question 09 : Missing Number](#question-09--missing-number)
 
 
 # Coding Questions
@@ -188,6 +190,7 @@ public void rotate(int[] nums, int k) {
     }
 ```
 ---
+### Day 2 - Easy
 #### Question 06 : [Maximum Consecutive Ones](https://leetcode.com/problems/max-consecutive-ones/description/)
 
 > :bulb: **Intuition** :white_check_mark:
@@ -348,7 +351,7 @@ class Solution {
 >
 > - The final value of `k` is 4, so the new length is `k + 1 = 5`.
 >
-> ### 📜 Code Explanation
+> ### 📜 Code Explanation [View Full Code](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/RemoveSortedDuplicates.java)
 >
 > ```java
 > public class Solution {
@@ -390,3 +393,81 @@ class Solution {
 > ```
 >
 ---
+
+#### Question 09 : [Missing Number](https://leetcode.com/problems/missing-number/)
+
+> ### 💡 Intuition and Approach
+>
+> The problem is to find the missing number from an array containing `n` distinct numbers taken from the range `0` to `n`. 
+> 
+> To solve this problem, we can use the mathematical formula for the sum of the first `n` natural numbers:
+>
+> \[
+> \text{Sum}_{\text{expected}} = \frac{n \cdot (n + 1)}{2}
+> \]
+>
+> ### 🧠 Intuition
+> 
+> - **Given**: An array `nums` of length `n` containing numbers from `0` to `n` with one missing.
+> - **Objective**: Find the missing number.
+> - **Approach**:
+>   1. **Calculate the expected sum** of the first `n` natural numbers using the formula: \(\frac{n \cdot (n + 1)}{2}\).
+>   2. **Calculate the actual sum** of the elements in the array.
+>   3. **The difference** between the expected sum and the actual sum is the missing number.
+> 
+> ### 📝 Steps
+> 
+> 1. **Initialize**:
+>    - Calculate the length `n` of the array.
+>    - Initialize a variable `sum` to store the sum of elements in the array.
+> 
+> 2. **Calculate the sum** of the array elements:
+>    - Iterate through each element in the array and add it to `sum`.
+> 
+> 3. **Calculate the expected sum** using the formula \(\frac{n \cdot (n + 1)}{2}\).
+> 
+> 4. **Find the missing number** by subtracting the actual sum from the expected sum.
+> 
+> ### 🔍 Detailed Walkthrough
+> 
+> - **Example**:
+>   - Given array: `[3, 0, 1]`
+>   - Length of the array `n = 3`
+>   - Expected sum: \(\frac{3 \cdot (3 + 1)}{2} = 6\)
+>   - Actual sum: \(3 + 0 + 1 = 4\)
+>   - Missing number: \(6 - 4 = 2\)
+> 
+> ### 📜 Code Explanation [View Full Code](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/MissingNumber.java)
+> 
+> ```java
+> public class Solution {
+>     public int missingNumber(int[] nums) {
+>         int n = nums.length; // Length of the input array
+>         int sum = 0; // Initialize sum to store the sum of elements
+>         for (int num : nums) {
+>             sum += num; // Calculate the sum of array elements
+>         }
+>         return ((n * (n + 1)) / 2 - sum); // Return the missing number
+>     }
+> }
+> ```
+>
+> This code efficiently computes the missing number by leveraging the properties of arithmetic sums, ensuring a time complexity of \(O(n)\) and a space complexity of \(O(1)\).
+
+> ### Flowchart
+> 
+> Here is the flowchart for the code:
+> 
+> ```mermaid
+> graph TD
+>     Start["Start"] --> Initialize["Calculate n = nums.length, Initialize sum = 0"]
+>     Initialize --> Loop["For each num in nums"]
+>     Loop --> AddNum["sum += num"]
+>     AddNum --> Loop
+>     Loop -->|All elements processed| CalculateExpectedSum["Calculate expected sum = (n * (n + 1)) / 2"]
+>     CalculateExpectedSum --> CalculateMissingNumber["missingNumber = expected sum - sum"]
+>     CalculateMissingNumber --> Return["Return missingNumber"]
+>     Return --> End["End"]
+> ```
+>
+> This flowchart represents the logic of the `missingNumber` method, showing the steps to calculate the expected sum, the actual sum of array elements, and finally, the missing number by finding the difference between the expected and actual sums.
