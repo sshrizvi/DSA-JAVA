@@ -13,6 +13,7 @@
       - [Question 07 : Move Zeroes](#question-07--move-zeroes)
       - [Question 08 : Remove Duplicates from Sorted Array](#question-08--remove-duplicates-from-sorted-array)
       - [Question 09 : Missing Number](#question-09--missing-number)
+      - [Question 10 : Single Number](#question-10--single-number)
 
 
 # Coding Questions
@@ -351,7 +352,8 @@ class Solution {
 >
 > - The final value of `k` is 4, so the new length is `k + 1 = 5`.
 >
-> ### 📜 Code Explanation [View Full Code](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/RemoveSortedDuplicates.java)
+> ### 📜 Code Explanation 
+> [View Full Code](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/RemoveSortedDuplicates.java)
 >
 > ```java
 > public class Solution {
@@ -436,6 +438,7 @@ class Solution {
 >   - Missing number: $6 - 4 = 2$
 > 
 > ### 📜 Code Explanation
+> [View Full Code](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/MissingNumber.java)
 > 
 > ```java
 > public class Solution {
@@ -469,3 +472,75 @@ class Solution {
 > ```
 >
 > This flowchart represents the logic of the `missingNumber` method, showing the steps to calculate the expected sum, the actual sum of array elements, and finally, the missing number by finding the difference between the expected and actual sums.
+---
+
+#### Question 10 : [Single Number](https://leetcode.com/problems/single-number/description/)
+
+> ### 💡 Intuition and Approach
+>
+> The problem is to find the single number in an array where every element appears twice except for one. This problem can be efficiently solved using **bit manipulation**.
+>
+> ### 🧠 Intuition
+> 
+> - **Given**: An array `nums` of integers where every element appears twice except for one.
+> - **Objective**: Find the element that appears only once.
+> - **Approach**:
+>   1. **XOR Property**: XOR of a number with itself is `0` and XOR of a number with `0` is the number itself. Therefore, `a ^ a = 0` and `a ^ 0 = a`.
+>   2. Using the above properties, XOR all elements in the array. The result will cancel out all elements that appear twice, leaving the single number.
+>
+> ### 📝 Steps
+> 
+> 1. **Initialize**:
+>    - Initialize a variable `ans` to `0`. This will hold the result of XOR operations.
+> 
+> 2. **XOR all elements**:
+>    - Iterate through each element `num` in the array `nums`.
+>    - XOR each element with `ans`.
+> 
+> 3. **Return the result**:
+>    - After completing the XOR operations, `ans` will hold the single number.
+> 
+> ### 🔍 Detailed Walkthrough
+> 
+> - **Example**:
+>   - Given array: `[4, 1, 2, 1, 2]`
+>   - XOR operations:
+>     - `0 ^ 4 = 4`
+>     - `4 ^ 1 = 5`
+>     - `5 ^ 2 = 7`
+>     - `7 ^ 1 = 6`
+>     - `6 ^ 2 = 4`
+>   - Result: `4` is the single number.
+> 
+> ### 📜 Code Explanation
+> [View Full Code]()
+> 
+> ```java
+> public class Solution {
+>     public int singleNumber(int[] nums) {
+>         int ans = 0; // Initialize the result variable
+>         for (int num : nums) {
+>             ans = ans ^ num; // XOR each element with the result
+>         }
+>         return ans; // Return the single number
+>     }
+> }
+> ```
+>
+> This code efficiently finds the single number using **bit manipulation** with a time complexity of \(O(n)\) and a space complexity of \(O(1)\).
+
+> ### Flowchart
+> 
+> Here is the flowchart for the code:
+> 
+> > ```mermaid
+> > graph TD
+> >     Start["Start"] --> Initialize["Initialize ans = 0"]
+> >     Initialize --> Loop["For each num in nums"]
+> >     Loop --> XOR["ans = ans ^ num"]
+> >     XOR --> Loop
+> >     Loop -->|All elements processed| Return["Return ans"]
+> >     Return --> End["End"]
+> > ```
+> 
+> This flowchart represents the logic of the `singleNumber` method, showing the steps to initialize the result variable, iterate through the array, apply the XOR operation to each element, and finally return the single number.
