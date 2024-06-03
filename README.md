@@ -23,6 +23,7 @@ Hey, I am Syed Shujaat Haider and I am starting a new journey of learning DSA wi
     justify-content: center;
   ">
   
+  
 | Topic       | Question           | Platform          | Solution          |
 |-------------|--------------------|-------------------|-------------------|
 | Array       | Largest Element in Array  | [GeeksforGeeks](https://www.geeksforgeeks.org/problems/largest-element-in-array4009/0)   | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day1-Basic.md/#question-01--largest-element-in-array)   |
@@ -31,7 +32,6 @@ Hey, I am Syed Shujaat Haider and I am starting a new journey of learning DSA wi
 |             | Question 02  | [CodeSignal](Platform_Link)   | [Notes](Notes)   |
 | Sorting     | Question 01  | [LeetCode](Platform_Link)   | [Notes](Notes)   |
 |             | Question 02  | [GeeksforGeeks](Platform_Link)   | [Notes](Notes)   |
-
 </div>
 
 > 💡 **Tip**: Click on Notes to see detailed notes for a particular question. 
