@@ -18,7 +18,10 @@ Hey, I am Syed Shujaat Haider and I am starting a new journey of learning DSA wi
     </summary>
 
 # DSA Coding Questions Topicwise With Notes
-<center>
+  <div style="
+    display: flex;
+    justify-content: center;
+  ">
   
 | Topic       | Question           | Platform          | Solution          |
 |-------------|--------------------|-------------------|-------------------|
@@ -29,7 +32,7 @@ Hey, I am Syed Shujaat Haider and I am starting a new journey of learning DSA wi
 | Sorting     | Question 01  | [LeetCode](Platform_Link)   | [Notes](Notes)   |
 |             | Question 02  | [GeeksforGeeks](Platform_Link)   | [Notes](Notes)   |
 
-</center>
+</div>
 
 > 💡 **Tip**: Click on Notes to see detailed notes for a particular question. 
 
