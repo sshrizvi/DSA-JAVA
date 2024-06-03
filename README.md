@@ -21,14 +21,12 @@ Hey, I am Syed Shujaat Haider and I am starting a new journey of learning DSA wi
 
 | Topic       | Question           | Platform          | Solution          |
 |-------------|--------------------|-------------------|-------------------|
-| Array       | Largest Element in Array  | [GeeksforGeeks](https://www.geeksforgeeks.org/problems/largest-element-in-array4009/0)   | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day1-Basic.md/#question-01--largest-element-in-array)   |
-|             | Question 02  | [GeeksforGeeks](Platform_Link)   | [Notes](Notes)   |
-| Linked List | Question 01  | [HackerRank](Platform_Link)   | [Notes](Notes)   |
-|             | Question 02  | [CodeSignal](Platform_Link)   | [Notes](Notes)   |
-| Sorting     | Question 01  | [LeetCode](Platform_Link)   | [Notes](Notes)   |
-|             | Question 02  | [GeeksforGeeks](Platform_Link)   | [Notes](Notes)   |
-
-
+| Array (*Striver's Array Series - Day1 : Basic*) | Largest Element in Array  | [GeeksforGeeks](https://www.geeksforgeeks.org/problems/largest-element-in-array4009/0)   | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day1-Basic.md/#question-01--largest-element-in-array)   |
+|             | Check If the Array is Sorted & Rotated   | [LeetCode](https://leetcode.com/problems/check-if-array-is-sorted-and-rotated/description/)  | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day1-Basic.md/#question-02--check-if-the-array-is-sorted--rotated)   |
+|             | Second Largest Element in Array without Sorting | [GeeksforGeeks](https://www.geeksforgeeks.org/problems/second-largest3735/0) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day1-Basic.md/#question-03--second-largest-element-in-array-without-sorting) |
+|             | Searching an Element in a Sorted Array | [GeeksforGeeks](https://www.geeksforgeeks.org/problems/who-will-win-1587115621/0) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day1-Basic.md/#question-04--searching-an-element-in-a-sorted-array) |
+|             | Rotate Array | [LeetCode](https://leetcode.com/problems/rotate-array/description/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day1-Basic.md/#question-05--rotate-array) |
+| Array (*Striver's Array Series - Day2 : Easy*) | Largest Element in Array  |  |  |
 > 💡 **Tip**: Click on Notes to see detailed notes for a particular question. 
 
 </details>
