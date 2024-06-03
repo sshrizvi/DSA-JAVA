@@ -14,6 +14,7 @@
       - [Question 08 : Remove Duplicates from Sorted Array](#question-08--remove-duplicates-from-sorted-array)
       - [Question 09 : Missing Number](#question-09--missing-number)
       - [Question 10 : Single Number](#question-10--single-number)
+      - [Question 11 : Union of Two Sorted Arrays](#question-11--union-of-two-sorted-arrays)
 
 
 # Coding Questions
@@ -513,7 +514,7 @@ class Solution {
 >   - Result: `4` is the single number.
 > 
 > ### 📜 Code Explanation
-> [View Full Code]()
+> [View Full Code](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/SingleNumber.java)
 > 
 > ```java
 > public class Solution {
@@ -527,7 +528,7 @@ class Solution {
 > }
 > ```
 >
-> This code efficiently finds the single number using **bit manipulation** with a time complexity of \(O(n)\) and a space complexity of \(O(1)\).
+> This code efficiently finds the single number using **bit manipulation** with a time complexity of $O(n)$ and a space complexity of $O(1)$.
 
 > ### Flowchart
 > 
@@ -544,3 +545,6 @@ class Solution {
 > > ```
 > 
 > This flowchart represents the logic of the `singleNumber` method, showing the steps to initialize the result variable, iterate through the array, apply the XOR operation to each element, and finally return the single number.
+---
+#### Question 11 : [Union of Two Sorted Arrays](https://www.geeksforgeeks.org/problems/union-of-two-sorted-arrays-1587115621/0)
+
