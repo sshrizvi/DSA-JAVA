@@ -34,6 +34,9 @@ Hey, I am Syed Shujaat Haider and I am starting a new journey of learning DSA wi
 |             | Single Number | [LeetCode](https://leetcode.com/problems/single-number/description/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day2-Easy.md/#question-10--single-number) |
 |             | Union of Two Sorted Arrays | [GeeksforGeeks](https://www.geeksforgeeks.org/problems/union-of-two-sorted-arrays-1587115621/0) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day2-Easy.md/#question-11--union-of-two-sorted-arrays) |
 |             | Two Sum | [LeetCode](https://leetcode.com/problems/two-sum/description/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day2-Easy.md/#question-12--two-sum) |
+| (*Striver's Array Series - Day3 - Medium*) | Search a 2D Matrix | [LeetCode](https://leetcode.com/problems/search-a-2d-matrix/description/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day3-Medium.md/#question-13--search-a-2d-matrix) |
+|  | Leader in an Array | [GeeksforGeeks](https://www.geeksforgeeks.org/problems/leaders-in-an-array-1587115620/0) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day3-Medium.md/#question-14--leader-in-an-array) |
+
 > 💡 **Tip**: Click on Notes to see detailed notes for a particular question. 
 
 </details>
