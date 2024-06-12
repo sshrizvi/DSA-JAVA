@@ -14,6 +14,13 @@
     - [🔍 Detailed Walkthrough](#-detailed-walkthrough-1)
     - [📜 Code Explanation](#-code-explanation)
     - [📊 Flowchart](#-flowchart-1)
+  - [Question 15 : Best Time to Buy and Sell Stock](#question-15--best-time-to-buy-and-sell-stock)
+    - [💡 Intuition and Approach](#-intuition-and-approach-2)
+    - [🧠 Intuition](#-intuition-2)
+    - [🔍 Detailed Walkthrough](#-detailed-walkthrough-2)
+    - [📜 Code Explanation](#-code-explanation-1)
+    - [📊 Flowchart](#-flowchart-2)
+  - [Question 16 : ](#question-16--)
 
 ## Question 13 : [Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/description/)
 
@@ -204,3 +211,63 @@ graph TD;
     Loop -->|End of loop| Reverse["Reverse leaders list"];
     Reverse --> Return["Return leaders list"];
 ```
+
+## Question 15 : [Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/)
+
+### 💡 Intuition and Approach
+
+The task is to find the maximum profit that can be achieved from buying and selling a stock. The stock prices for each day are given in an array.
+
+### 🧠 Intuition
+
+*   **Given**: An array `prices` where `prices[i]` is the price of a given stock on the `i`\-th day.
+*   **Objective**: Find the maximum profit by choosing a single day to buy one stock and choosing a different day in the future to sell that stock.
+*   **Approach**:
+    1.  **Two-Pointer Technique**: Use two pointers (`left` and `right`). The `left` pointer points to the day to buy the stock and the `right` pointer points to the day to sell the stock.
+    2.  **Iterate through the array**: Move the `right` pointer through the array to find the maximum profit.
+    3.  **Update pointers**: If the price on the `left` pointer is greater than the price on the `right` pointer, move the `left` pointer to the `right` pointer's position. Otherwise, calculate the profit and update the `maxProfit` if the current profit is greater.
+
+### 🔍 Detailed Walkthrough
+
+*   **Example**:
+    *   Given prices: `[7, 1, 5, 3, 6, 4]`
+    *   Max Profit: `5`
+        *   Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6 - 1 = 5. 
+
+### 📜 Code Explanation
+```java
+public int maxProfit(int[] prices){
+    int maxProfit = 0; // Initialize maxProfit to 0
+    int left = 0, right = 1; // Initialize pointers
+    while(right < prices.length){
+        if(prices[left] > prices[right]){
+            left = right; // Update left pointer if current left price is greater than right price
+            right++;
+        }
+        else{
+            maxProfit = Math.max(maxProfit, prices[right] - prices[left]); // Update maxProfit
+            right++;
+        }
+    }
+    return maxProfit; // Return the maximum profit
+}
+```
+> [!NOTE]
+> To see full code , [click here](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/BuyAndSellStock.java)
+
+### 📊 Flowchart
+```mermaid
+graph TD;
+    Start["Start"] --> Initialize["Initialize maxProfit = 0, left = 0, right = 1"];
+    Initialize --> Loop["While right < prices.length"];
+    Loop --> CheckLeft["Check if prices[left] > prices[right]"];
+    CheckLeft -- Yes --> UpdateLeft["Set left = right, Increment right"];
+    CheckLeft -- No --> CalculateProfit["Calculate profit, Update maxProfit if current profit is greater"];
+    UpdateLeft --> Loop;
+    CalculateProfit --> IncrementRight["Increment right"];
+    IncrementRight --> Loop;
+    Loop -->|End of loop| Return["Return maxProfit"];
+    Return --> End["End"];
+```
+
+## Question 16 : []()
