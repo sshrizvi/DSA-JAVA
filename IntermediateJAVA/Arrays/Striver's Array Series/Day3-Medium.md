@@ -20,7 +20,14 @@
     - [🔍 Detailed Walkthrough](#-detailed-walkthrough-2)
     - [📜 Code Explanation](#-code-explanation-1)
     - [📊 Flowchart](#-flowchart-2)
-  - [Question 16 : ](#question-16--)
+  - [Question 16 : Rearrange Array Elements by Sign](#question-16--rearrange-array-elements-by-sign)
+    - [🧠 Intuition](#-intuition-3)
+    - [📋 Approach](#-approach-1)
+    - [🚶 Detailed Walkthrough](#-detailed-walkthrough-3)
+    - [📝 Code](#-code-1)
+    - [📊 Flowchart](#-flowchart-3)
+    - [💡 Notes](#-notes)
+    - [💡 Tips](#-tips)
 
 ## Question 13 : [Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/description/)
 
@@ -270,4 +277,79 @@ graph TD;
     Return --> End["End"];
 ```
 
-## Question 16 : []()
+## Question 16 : [Rearrange Array Elements by Sign](https://leetcode.com/problems/rearrange-array-elements-by-sign/description/)
+
+### 🧠 Intuition
+
+The problem requires rearranging an array such that positive and negative numbers alternate, starting with a positive number. Given that there are always equal numbers of positive and negative numbers, this can be achieved by placing positive numbers at even indices and negative numbers at odd indices.
+
+### 📋 Approach
+
+1.  **Initialize Result Array**: Create an array `ans` of the same length as the input array `nums` to store the rearranged elements.
+2.  **Pointers for Positions**: Use two pointers, `pos` for positive numbers (starting at 0) and `neg` for negative numbers (starting at 1).
+3.  **Iterate Through Input Array**: Traverse through each element in the input array `nums`.
+    *   If the element is positive, place it at the position indicated by `pos` and increment `pos` by 2.
+    *   If the element is negative, place it at the position indicated by `neg` and increment `neg` by 2.
+4.  **Return Result**: After the loop, the `ans` array contains the rearranged elements, which is then returned.
+
+### 🚶 Detailed Walkthrough
+
+1.  **Initialization**:
+    
+    *   Create an array `ans` of length equal to `nums`.
+    *   Initialize `pos` to 0 and `neg` to 1.
+2.  **Iterate through `nums`**:
+    
+    *   For each element `n` in `nums`:
+        *   If `n` is positive, assign `ans[pos] = n` and increment `pos` by 2.
+        *   If `n` is negative, assign `ans[neg] = n` and increment `neg` by 2.
+3.  **Result**:
+    
+    *   After processing all elements in `nums`, return the `ans` array which now has positive and negative numbers in alternate positions.
+
+### 📝 Code
+```java
+public class Solution {
+    public int[] rearrangeArray(int[] nums) {
+        int[] ans = new int[nums.length];
+        int pos = 0;
+        int neg = 1;
+        for (int n : nums) {
+            if (n > 0) {
+                ans[pos] = n;
+                pos += 2;
+            } else {
+                ans[neg] = n;
+                neg += 2;
+            }
+        }
+        return ans;
+    }
+}
+```
+> [!NOTE]
+> To see full code , [click here](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/AlternatingIntegers.java)
+
+### 📊 Flowchart
+```mermaid
+graph TD;
+    Start["Start"] --> Initialize["Initialize ans = new int[nums.length], pos = 0, neg = 1"];
+    Initialize --> Loop["For each n in nums"];
+    Loop --> CheckPositive["Is n > 0?"];
+    CheckPositive -->|Yes| AssignPositive["ans[pos] = n; pos += 2"];
+    AssignPositive --> Loop;
+    CheckPositive -->|No| AssignNegative["ans[neg] = n; neg += 2"];
+    AssignNegative --> Loop;
+    Loop -->|All elements processed| Return["Return ans"];
+    Return --> End["End"];
+```
+
+### 💡 Notes
+
+*   This approach ensures that the array is traversed only once, making it efficient with a time complexity of $O(n)$.
+*   The space complexity is $O(n)$ due to the creation of the result array `ans`.
+
+### 💡 Tips
+
+*   Make sure to always start placing positive numbers at even indices and negative numbers at odd indices to satisfy the alternating condition.
+*   Using separate pointers for positive and negative placements helps to maintain the alternating order effectively.
