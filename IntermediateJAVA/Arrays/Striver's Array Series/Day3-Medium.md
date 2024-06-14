@@ -28,6 +28,21 @@
     - [📊 Flowchart](#-flowchart-3)
     - [💡 Notes](#-notes)
     - [💡 Tips](#-tips)
+  - [Question 17 : Find the Duplicate Number](#question-17--find-the-duplicate-number)
+    - [🧠 Intuition](#-intuition-4)
+    - [📜 Approach](#-approach-2)
+    - [🚀 Detailed Walkthrough](#-detailed-walkthrough-4)
+    - [⏲️ Time Complexity](#️-time-complexity)
+    - [💾 Space Complexity](#-space-complexity)
+    - [🚀 Code](#-code-2)
+    - [📊 Flowchart](#-flowchart-4)
+    - [🧠 Intuition](#-intuition-5)
+    - [📜 Approach](#-approach-3)
+    - [🚀 Detailed Walkthrough](#-detailed-walkthrough-5)
+    - [⏲️ Time Complexity](#️-time-complexity-1)
+    - [💾 Space Complexity](#-space-complexity-1)
+    - [📜 Code](#-code-3)
+    - [📊 Flowchart](#-flowchart-5)
 
 ## Question 13 : [Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/description/)
 
@@ -353,3 +368,160 @@ graph TD;
 
 *   Make sure to always start placing positive numbers at even indices and negative numbers at odd indices to satisfy the alternating condition.
 *   Using separate pointers for positive and negative placements helps to maintain the alternating order effectively.
+
+
+## Question 17 : [Find the Duplicate Number](https://leetcode.com/problems/find-the-duplicate-number/description/)
+
+<details style="
+  border: 1px solid #444;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #222;
+  color: #ddd;
+">
+    <summary style="
+    cursor: pointer;
+    font-weight: bold;
+    color: #ddd;
+  ">
+        <em>Using HashMap</em>
+    </summary>
+
+### 🧠 Intuition
+We use a HashMap to track numbers we have encountered. If we find a number already in the HashMap, it is the duplicate.
+
+### 📜 Approach
+1. Initialize an empty HashMap.
+2. Iterate through each number in the array.
+3. For each number, check if it exists in the HashMap:
+   - If it exists, return that number as the duplicate.
+   - If it doesn't exist, add it to the HashMap with a value of 1.
+4. If no duplicate is found (though problem guarantees there is one), return Integer.MIN_VALUE.
+
+### 🚀 Detailed Walkthrough
+1. Create an empty HashMap `map`.
+2. Loop through each number `x` in `nums`.
+3. If `x` is not in the HashMap, add `x` to the HashMap with a count of 1.
+4. If `x` is already in the HashMap, return `x` as the duplicate.
+5. If no duplicates are found (this shouldn't happen per problem constraints), return `Integer.MIN_VALUE`.
+
+### ⏲️ Time Complexity
+- $O(n)$: Traversing the array once with $O(1)$ HashMap operations.
+
+### 💾 Space Complexity
+- $O(n)$: Using a HashMap to store up to `n` elements.
+
+### 🚀 Code
+```java
+public int findDuplicate(int[] nums) {
+    HashMap<Integer,Integer> map = new HashMap<>();
+    for(int x : nums){
+        if(map.get(x) == null) map.put(x,1);
+        else return x;
+    }
+    return Integer.MIN_VALUE;
+}
+```
+> [!NOTE]
+> To see full code , [click here](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/FindDuplicate.java)
+
+### 📊 Flowchart
+```mermaid
+graph TD;
+    Start["Start"] --> Initialize["Initialize HashMap"];
+    Initialize --> Loop["Loop through each number in nums"];
+    Loop --> Check["Check if number is in HashMap"];
+    Check -->|No| Add["Add number to HashMap"];
+    Add --> Loop;
+    Check -->|Yes| ReturnDuplicate["Return number as duplicate"];
+    ReturnDuplicate --> End["End"];
+    Loop -->|End of Loop| ReturnMinValue["Return Integer.MIN_VALUE"];
+    ReturnMinValue --> End;
+```
+</details>
+<br>
+<details style="
+  border: 1px solid #444;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #222;
+  color: #ddd;
+">
+    <summary style="
+    cursor: pointer;
+    font-weight: bold;
+    color: #ddd;
+  ">
+        <em>Using Floyd's Tortoise and Hare Algorithm</em>
+    </summary>
+
+### 🧠 Intuition
+The problem can be reduced to finding a cycle in a linked list. By treating the array as a linked list where each index points to the value as the next node, we can detect a cycle using Floyd's Tortoise and Hare algorithm.
+
+### 📜 Approach
+1. *Initialize* : Set both `slow` and `fast` pointers to the first element of the array.
+2. *Phase 1* - Finding the intersection point:
+   - Move `slow` pointer one step at a time.
+   - Move `fast` pointer two steps at a time.
+   - Continue until `slow` and `fast` pointers meet.
+3. *Phase 2* - Finding the entrance of the cycle:
+   - Reset `slow` pointer to the start of the array.
+   - Move both `slow` and `fast` pointers one step at a time.
+   - The point where they meet again is the duplicate number.
+
+### 🚀 Detailed Walkthrough
+1. Initialize `slow` and `fast` to the first element:
+   - `slow = nums[0]`
+   - `fast = nums[0]`
+2. Phase 1 - Intersection Point:
+   - Move `slow` one step at a time: `slow = nums[slow]`
+   - Move `fast` two steps at a time: `fast = nums[nums[fast]]`
+   - Continue until `slow` equals `fast`
+3. Phase 2 - Entrance of Cycle:
+   - Reset `slow` to the start of the array: `slow = nums[0]`
+   - Move both `slow` and `fast` one step at a time: `slow = nums[slow]`, `fast = nums[fast]`
+   - The point where `slow` and `fast` meet is the duplicate number
+4. Return `slow` as the duplicate number.
+
+### ⏲️ Time Complexity
+- $O(n)$: Each phase of the algorithm runs in linear time.
+
+### 💾 Space Complexity
+- $O(1)$: Only constant space is used.
+
+### 📜 Code
+```java
+public int findDuplicateOptimal(int[] nums) {
+    int slow = nums[0];
+    int fast = nums[0];
+
+    // Phase 1: Finding the intersection point
+    do {
+        slow = nums[slow];
+        fast = nums[nums[fast]];
+    } while (slow != fast);
+
+    // Phase 2: Finding the entrance to the cycle
+    slow = nums[0];
+    while (slow != fast) {
+        slow = nums[slow];
+        fast = nums[fast];
+    }
+
+    return slow;
+}
+```
+
+### 📊 Flowchart
+```mermaid
+graph TD;
+    Start["Start"] --> Initialize["Initialize slow and fast to nums[0]"];
+    Initialize --> Phase1["Phase 1: Find the intersection point"];
+    Phase1 --> CheckIntersection["Do slow = nums[slow], fast = nums[nums[fast]] until slow == fast"];
+    CheckIntersection --> Phase2["Phase 2: Find the entrance to the cycle"];
+    Phase2 --> ResetSlow["Reset slow to nums[0]"];
+    ResetSlow --> Loop["Move slow and fast one step at a time until they meet"];
+    Loop --> Return["Return slow as the duplicate"];
+    Return --> End["End"];
+```
+</details>

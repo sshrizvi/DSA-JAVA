@@ -38,6 +38,7 @@ Hey, I am Syed Shujaat Haider and I am starting a new journey of learning DSA wi
 |  | Leader in an Array | [GeeksforGeeks](https://www.geeksforgeeks.org/problems/leaders-in-an-array-1587115620/0) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day3-Medium.md/#question-14--leader-in-an-array) |
 |  | Best Time to Buy and Sell Stock | [LeetCode](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day3-Medium.md/#question-15--best-time-to-buy-and-sell-stock) |
 |  | Rearrange Array Elements by Sign | [LeetCode](https://leetcode.com/problems/rearrange-array-elements-by-sign/description/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day3-Medium.md/#question-16--rearrange-array-elements-by-sign) |
+|  | Find the Duplicate Number | [LeetCode](https://leetcode.com/problems/find-the-duplicate-number/description/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day3-Medium.md/#question-17--find-the-duplicate-number) |
 <!-- |  |  | [LeetCode]() | [Notes]() | -->
 
 > 💡 **Tip**: Click on Notes to see detailed notes for a particular question. 
