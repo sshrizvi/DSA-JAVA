@@ -432,6 +432,7 @@ public int findDuplicate(int[] nums) {
     return Integer.MIN_VALUE;
 }
 ```
+
 > [!NOTE]
 > To see full code , [click here](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/FindDuplicate.java)
 
@@ -448,6 +449,7 @@ graph TD;
     Loop -->|End of Loop| ReturnMinValue["Return Integer.MIN_VALUE"];
     ReturnMinValue --> End;
 ```
+
 </details>
 <br>
 <details style="
@@ -534,6 +536,7 @@ graph TD;
     Loop --> Return["Return slow as the duplicate"];
     Return --> End["End"];
 ```
+
 </details>
 
 ## Question 18 : [Maximum Subarray](https://leetcode.com/problems/maximum-subarray/description/)
