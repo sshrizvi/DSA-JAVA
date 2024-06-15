@@ -43,6 +43,16 @@
     - [💾 Space Complexity](#-space-complexity-1)
     - [📜 Code](#-code-3)
     - [📊 Flowchart](#-flowchart-5)
+  - [Question 18 : Maximum Subarray](#question-18--maximum-subarray)
+    - [🧠 Intuition](#-intuition-6)
+    - [📜 Approach](#-approach-4)
+    - [🚀 Detailed Walkthrough](#-detailed-walkthrough-6)
+    - [⏲️ Time Complexity](#️-time-complexity-2)
+    - [💾 Space Complexity](#-space-complexity-2)
+    - [📜 Code](#-code-4)
+    - [📊 Flowchart](#-flowchart-6)
+    - [📝 Example](#-example)
+    - [✨ Notes](#-notes-1)
 
 ## Question 13 : [Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/description/)
 
@@ -525,3 +535,85 @@ graph TD;
     Return --> End["End"];
 ```
 </details>
+
+## Question 18 : [Maximum Subarray](https://leetcode.com/problems/maximum-subarray/description/)
+
+### 🧠 Intuition
+The goal is to find the maximum sum of a contiguous subarray within a one-dimensional numeric array. ***Kadane's Algorithm*** helps in solving this problem efficiently using a dynamic programming approach. The intuition is to iterate through the array while keeping track of the maximum sum subarray ending at each position and updating the global maximum sum encountered so far.
+
+### 📜 Approach
+1. **Initialize `maxCurrent` and `maxGlobal`**:
+   - Set both `maxCurrent` and `maxGlobal` to the first element of the array. This ensures that the algorithm has a valid starting point.
+2. **Iterate through the array starting from the second element**:
+   - For each element, update `maxCurrent` to be the maximum of the current element itself and the sum of `maxCurrent` plus the current element.
+   - Update `maxGlobal` if `maxCurrent` is greater than `maxGlobal`.
+3. **Return `maxGlobal`**:
+   - After iterating through the entire array, `maxGlobal` will contain the largest sum of any contiguous subarray.
+
+### 🚀 Detailed Walkthrough
+1. **Initialize `maxCurrent` and `maxGlobal`**:
+   ```java
+   int maxCurrent = nums[0], maxGlobal = nums[0];
+   ```
+   - Set both to the first element of `nums`.
+
+2. **Iterate through the array**:
+   ```java
+   for(int i = 1; i < nums.length; i++){
+       maxCurrent = Math.max(nums[i], maxCurrent + nums[i]);
+       if(maxCurrent > maxGlobal) maxGlobal = maxCurrent;
+   }
+   ```
+   - For each element `nums[i]` from index 1 to the end of the array:
+     - Update `maxCurrent` to the maximum of the current element itself and the sum of `maxCurrent` plus the current element.
+     - If `maxCurrent` is greater than `maxGlobal`, update `maxGlobal` to `maxCurrent`.
+
+3. **Return the result**:
+   ```java
+   return maxGlobal;
+   ```
+   - `maxGlobal` contains the maximum sum of any contiguous subarray.
+
+### ⏲️ Time Complexity
+- $O(n)$: The algorithm iterates through the array exactly once.
+
+### 💾 Space Complexity
+- $O(1)$: Only a few extra variables are used, regardless of the input size.
+
+### 📜 Code
+Here is the implementation of the `maxSubArray` function in Java:
+
+```java
+public int maxSubArray(int[] nums) {
+    int maxCurrent = nums[0], maxGlobal = nums[0];
+    for(int i = 1; i < nums.length; i++){
+        maxCurrent = Math.max(nums[i], maxCurrent + nums[i]);
+        if(maxCurrent > maxGlobal) maxGlobal = maxCurrent;
+    }
+    return maxGlobal;
+}
+```
+> [!NOTE]
+> To see full code , [click here](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/FindDuplicate.java)
+
+### 📊 Flowchart
+```mermaid
+graph TD;
+    Start["Start"] --> Initialize["Initialize maxCurrent and maxGlobal to nums[0]"];
+    Initialize --> Loop["For i from 1 to nums.length - 1"];
+    Loop --> UpdateMaxCurrent["Update maxCurrent to Math.max(nums[i], maxCurrent + nums[i])"];
+    UpdateMaxCurrent --> CheckMaxGlobal["If maxCurrent > maxGlobal, update maxGlobal"];
+    CheckMaxGlobal --> Loop;
+    Loop -->|End of loop| Return["Return maxGlobal"];
+    Return --> End["End"];
+```
+
+### 📝 Example
+Let's consider an example to illustrate the algorithm:
+
+- **Input** : `nums = [-2,1,-3,4,-1,2,1,-5,4]`
+- **Output** : `6` (The contiguous subarray `[4,-1,2,1]` has the largest sum = 6)
+
+### ✨ Notes
+- Kadane's Algorithm is optimal for solving the Maximum Subarray Sum problem in terms of both time and space complexity.
+- This algorithm works for both positive and negative integers in the array.

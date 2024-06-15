@@ -1,5 +1,3 @@
-import java.lang.reflect.Array;
-
 public class RotateArray {
     public static void rotateArrayChadApproach(int[] nums, int k) {
         k = k % nums.length;
