@@ -53,6 +53,15 @@
     - [📊 Flowchart](#-flowchart-6)
     - [📝 Example](#-example)
     - [✨ Notes](#-notes-1)
+  - [Question 19 : Max Sum in Subarray](#question-19--max-sum-in-subarray)
+    - [🧠 Intuition](#-intuition-7)
+    - [🚀 Approach](#-approach-5)
+    - [Detailed Walkthrough 📝](#detailed-walkthrough-)
+    - [📘 Example](#-example-1)
+    - [💻 Code](#-code-5)
+    - [⏳ Time Complexity](#-time-complexity)
+    - [💾 Space Complexity](#-space-complexity-3)
+    - [📊 Flowchart](#-flowchart-7)
 
 ## Question 13 : [Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/description/)
 
@@ -620,3 +629,84 @@ Let's consider an example to illustrate the algorithm:
 ### ✨ Notes
 - Kadane's Algorithm is optimal for solving the Maximum Subarray Sum problem in terms of both time and space complexity.
 - This algorithm works for both positive and negative integers in the array.
+
+## Question 19 : [Max Sum in Subarray](https://www.geeksforgeeks.org/problems/max-sum-in-sub-arrays0824/0)
+
+### 🧠 Intuition 
+
+The problem is to find the maximum sum of any two adjacent elements in an array. The simplest approach is to iterate through the array and calculate the sum of each pair of adjacent elements, keeping track of the maximum sum encountered.
+
+### 🚀 Approach 
+
+1. **Initialize**:
+   - Initialize a variable `maxSum` to store the maximum sum of adjacent pairs. Start with an initial value of 0.
+2. **Iterate**:
+   - Iterate through the array from the first element to the second last element.
+3. **Calculate Sum**:
+   - For each element, calculate the sum of the current element and the next element.
+4. **Update Maximum**:
+   - If the calculated sum is greater than `maxSum`, update `maxSum`.
+5. **Return Result**:
+   - After iterating through the array, return the value of `maxSum`.
+
+### Detailed Walkthrough 📝
+
+1. **Initialization**:
+   - Set `maxSum` to 0.
+
+2. **Iteration**:
+   - Loop through the array using an index `i` from 0 to `N-2` (since we are looking at pairs, we stop at the second last element).
+   - In each iteration, calculate the sum of `arr[i]` and `arr[i+1]`.
+   - If the calculated sum is greater than `maxSum`, update `maxSum` with this sum.
+
+3. **Return the Result**:
+   - After completing the loop, `maxSum` will hold the maximum sum of any two adjacent elements.
+   - Return `maxSum`.
+
+### 📘 Example 
+
+Consider the array `arr = [1, 3, 5, 2, 7, 8]` with `N = 6`.
+
+- Initial `maxSum = 0`
+- Iteration 1: `arr[0] + arr[1] = 1 + 3 = 4`, `maxSum = 4`
+- Iteration 2: `arr[1] + arr[2] = 3 + 5 = 8`, `maxSum = 8`
+- Iteration 3: `arr[2] + arr[3] = 5 + 2 = 7`, `maxSum = 8`
+- Iteration 4: `arr[3] + arr[4] = 2 + 7 = 9`, `maxSum = 9`
+- Iteration 5: `arr[4] + arr[5] = 7 + 8 = 15`, `maxSum = 15`
+- Final `maxSum = 15`
+
+### 💻 Code
+```java
+    public static long pairWithMaxSum(long arr[], long N){
+        long maxSum = 0;
+        for(long i = 0; i < N - 1; i++){
+            if(maxSum < arr[(int)i] + arr[(int)(i+1)]) maxSum = arr[(int)i] + arr[(int)(i+1)];
+        }
+        return maxSum;
+    }
+```
+
+> [!NOTE]
+> To see full code, [click here](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/MaxSumInSubarrays.java)
+
+### ⏳ Time Complexity 
+
+- The time complexity of this approach is $O(N)$, where $N$ is the length of the array. This is because we iterate through the array once.
+
+### 💾 Space Complexity 
+
+- The space complexity is $O(1)$ because we are using a constant amount of extra space.
+
+### 📊 Flowchart 
+
+```mermaid
+graph TD;
+    Start["Start"] --> Initialize["Initialize maxSum = 0"];
+    Initialize --> Loop["For i from 0 to N-2"];
+    Loop --> CheckSum["Calculate sum = arr[i] + arr[i+1]"];
+    CheckSum --> UpdateMaxSum["If sum > maxSum, update maxSum"];
+    UpdateMaxSum --> ContinueLoop["Continue loop"];
+    ContinueLoop --> Loop;
+    Loop -->|End of loop| Return["Return maxSum"];
+    Return --> End["End"];
+```
