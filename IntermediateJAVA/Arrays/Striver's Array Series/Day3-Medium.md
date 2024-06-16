@@ -71,6 +71,15 @@
     - [💾 Space Complexity](#-space-complexity-4)
     - [📊 Flowchart](#-flowchart-8)
     - [Summary](#summary)
+  - [Question 21 : Unique Paths](#question-21--unique-paths)
+    - [🧠 Intuition](#-intuition-9)
+    - [📚 Approach](#-approach-7)
+    - [📝 Detailed Walkthrough](#-detailed-walkthrough-8)
+    - [🔄 Code](#-code-7)
+    - [⏳ Time Complexity](#-time-complexity-2)
+    - [💾 Space Complexity](#-space-complexity-5)
+    - [📊 Flowchart](#-flowchart-9)
+    - [Summary](#summary-1)
 
 ## Question 13 : [Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/description/)
 
@@ -805,3 +814,75 @@ graph TD;
 
 ### Summary
 This solution generates Pascal's Triangle using a 2D array and a list of lists to store the values. It iteratively fills each row based on the sum of values from the previous rows, leveraging the properties of Pascal's Triangle. The algorithm runs in $O(n^2)$ time and space complexity, making it efficient for moderate values of `numRows`.
+
+## Question 21 : [Unique Paths](https://leetcode.com/problems/unique-paths/)
+
+### 🧠 Intuition
+The goal is to fill a 2D table where each cell represents the number of unique paths to that cell from the top-left corner, assuming you can only move right or down. The value in each cell is derived from the sum of the paths to the cell above it and the cell to the left of it.
+
+### 📚 Approach
+1. **Initialize a 2D table**: Create a 2D array `table` with dimensions `m` by `n`.
+2. **Fill the table**:
+   - For the first row and first column, set all values to `1` since there's only one way to reach any cell in the first row (move right) or the first column (move down).
+   - For all other cells, set the value to the sum of the value of the cell above it and the value of the cell to the left of it.
+3. **Return the result**: The value at `table[m-1][n-1]` represents the number of unique paths to the bottom-right corner.
+
+### 📝 Detailed Walkthrough
+1. **Initialize the 2D table**: Create a 2D array `table` with `m` rows and `n` columns.
+2. **Outer loop**: Iterate through each row from `0` to `m-1`.
+3. **Inner loop**: For each row, iterate through each column from `0` to `n-1`.
+   - If `i == 0` or `j == 0`, set `table[i][j] = 1` because there is only one way to get to any cell in the first row or column.
+   - Otherwise, set `table[i][j] = table[i-1][j] + table[i][j-1]`, the sum of the paths from the top and left cells.
+4. **Return the result**: Return `table[m-1][n-1]`, the number of unique paths to the bottom-right corner.
+
+### 🔄 Code
+```java
+public class Solution {
+    public int uniquePaths(int m, int n) {
+        int[][] table = new int[m][n];
+        for(int i = 0; i < m; i++) {
+            for(int j = 0; j < n; j++) {
+                if(i == 0 || j == 0) {
+                    table[i][j] = 1;
+                } else {
+                    table[i][j] = table[i-1][j] + table[i][j-1];
+                }
+            }
+        }
+        return table[m-1][n-1];
+    }
+}
+```
+
+> [!NOTE]
+> To see full code, [click here](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/UniquePaths.java)
+
+### ⏳ Time Complexity
+The time complexity of this algorithm is $O(m \times n)$ because we iterate through each cell in the `m` by `n` grid exactly once.
+
+### 💾 Space Complexity
+The space complexity is $O(m \times n)$ due to the additional storage required for the `table` array.
+
+### 📊 Flowchart
+```mermaid
+graph TD;
+    Start["Start"] --> Initialize["Initialize table with dimensions m x n"];
+    Initialize --> OuterLoop["For i from 0 to m-1"];
+    OuterLoop --> InnerLoop["For j from 0 to n-1"];
+    InnerLoop --> |i == 0 or j == 0| SetOne["table[i][j] = 1"];
+    InnerLoop --> |else| SetValue["table[i][j] = table[i-1][j] + table[i][j-1]"];
+    SetOne --> NextInnerLoop["Move to the next column"];
+    SetValue --> NextInnerLoop;
+    NextInnerLoop --> InnerLoop;
+    InnerLoop --> NextOuterLoop["Move to the next row"];
+    NextOuterLoop --> OuterLoop;
+    OuterLoop --> EndLoop["End of loops"];
+    EndLoop --> Return["Return table[m-1][n-1]"];
+    Return --> End["End"];
+```
+
+### Summary
+This function calculates the number of unique paths in a grid from the top-left corner to the bottom-right corner using dynamic programming. The time and space complexity are both $O(m \times n)$, making it efficient for moderate grid sizes.
+
+> [!IMPORTANT]
+> If you want to see all the approaches to solve the problem, [click here](https://takeuforward.org/data-structure/grid-unique-paths-count-paths-from-left-top-to-the-right-bottom-of-a-matrix/)

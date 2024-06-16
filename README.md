@@ -42,6 +42,7 @@ Hey, I am Syed Shujaat Haider and I am starting a new journey of learning DSA wi
 |  | Maximum Subarray | [LeetCode](https://leetcode.com/problems/maximum-subarray/description/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day3-Medium.md/#question-18--maximum-subarray) |
 |  | Max Sum in Subarrays | [GeeksforGeeks](https://www.geeksforgeeks.org/problems/max-sum-in-sub-arrays0824/0) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day3-Medium.md/#question-19--max-sum-in-subarray) |
 |  | Pascal's Triangle | [LeetCode](https://leetcode.com/problems/pascals-triangle/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day3-Medium.md/#question-20--pascals-triangle) |
+|  | Unique Paths | [LeetCode](https://leetcode.com/problems/unique-paths/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day3-Medium.md/#question-21--unique-paths) |
 <!-- |  |  | [LeetCode]() | [Notes]() | -->
 
 > 💡 **Tip**: Click on Notes to see detailed notes for a particular question. 
