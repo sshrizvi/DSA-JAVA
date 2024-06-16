@@ -62,6 +62,15 @@
     - [⏳ Time Complexity](#-time-complexity)
     - [💾 Space Complexity](#-space-complexity-3)
     - [📊 Flowchart](#-flowchart-7)
+  - [Question 20 : Pascal's Triangle](#question-20--pascals-triangle)
+    - [🧠 Intuition](#-intuition-8)
+    - [📚 Approach](#-approach-6)
+    - [📝 Detailed Walkthrough](#-detailed-walkthrough-7)
+    - [🔄 Code](#-code-6)
+    - [⏳ Time Complexity](#-time-complexity-1)
+    - [💾 Space Complexity](#-space-complexity-4)
+    - [📊 Flowchart](#-flowchart-8)
+    - [Summary](#summary)
 
 ## Question 13 : [Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/description/)
 
@@ -710,3 +719,89 @@ graph TD;
     Loop -->|End of loop| Return["Return maxSum"];
     Return --> End["End"];
 ```
+
+## Question 20 : [Pascal's Triangle](https://leetcode.com/problems/pascals-triangle/)
+
+### 🧠 Intuition
+The goal is to generate Pascal's Triangle up to `numRows`. Pascal's Triangle is a triangular array of integers where each row represents the coefficients of the binomial expansion. Each number is the sum of the two directly above it in the previous row, except for the edges, which are always `1`.
+
+### 📚 Approach
+1. **Initialize a 2D array**: Use a 2D array `matrix` to store the values of Pascal's Triangle.
+2. **Iterate through rows**: For each row `i`, create a new list to hold the current row's values.
+3. **Fill the values**: Use a nested loop to fill the values in the current row. The value at position `(f, s)` in `matrix` is the sum of the values to the left and above it, i.e., `matrix[f][s] = matrix[f][s-1] + matrix[f-1][s]`, except for the edges where it is always `1`.
+4. **Add current row to result**: After calculating the values for the current row, add the list to the `triangle` list.
+
+### 📝 Detailed Walkthrough
+1. **Initialize the 2D array**: Create a `matrix` with dimensions `[numRows][numRows]` and initialize the `triangle` list.
+2. **Outer loop**: Iterate from `0` to `numRows - 1`.
+   - Initialize `f` (current row index) to `i` and `s` (current column index) to `0`.
+   - Create an empty list `currentList` to store the values of the current row.
+3. **Inner loop**: While `f >= 0` and `s <= i`:
+   - If `f == 0` or `s == 0`, set `matrix[f][s] = 1`.
+   - Else, set `matrix[f][s] = matrix[f][s-1] + matrix[f-1][s]`.
+   - Add `matrix[f][s]` to `currentList`.
+   - Decrement `f` and increment `s`.
+4. **Add row to result**: After exiting the inner loop, add `currentList` to `triangle`.
+5. **Return the result**: Return the `triangle` list.
+
+### 🔄 Code
+```java
+public class Solution {
+    public static List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> triangle = new ArrayList<>();
+        int[][] matrix = new int[numRows][numRows];
+        
+        for (int i = 0; i < numRows; i++) {
+            int f = i, s = 0;
+            List<Integer> currentList = new ArrayList<>();
+            
+            while (f >= 0 && s <= i) {
+                if (f == 0 || s == 0) {
+                    matrix[f][s] = 1;
+                } else {
+                    matrix[f][s] = matrix[f][s - 1] + matrix[f - 1][s];
+                }
+                currentList.add(matrix[f][s]);
+                f--;
+                s++;
+            }
+            
+            triangle.add(currentList);
+        }
+        
+        return triangle;
+    }
+}
+```
+
+> [!NOTE]
+> To see full code, [click here](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/PascalsTriangle.java)
+
+### ⏳ Time Complexity
+The time complexity of this algorithm is $O(n^2)$, where $n$ is the number of rows. This is because we iterate through each cell of the matrix exactly once.
+
+### 💾 Space Complexity
+The space complexity is also $O(n^2)$ due to the additional storage required for the `matrix` and `triangle` lists.
+
+### 📊 Flowchart
+```mermaid
+graph TD;
+    Start["Start"] --> Initialize["Initialize triangle and matrix"];
+    Initialize --> OuterLoop["For i from 0 to numRows-1"];
+    OuterLoop --> InitVars["Initialize f = i, s = 0, currentList"];
+    InitVars --> InnerLoop["While f >= 0 and s <= i"];
+    InnerLoop --> |f == 0 or s == 0| SetOne["matrix[f][s] = 1"];
+    InnerLoop --> |else| SetValue["matrix[f][s] = matrix[f][s-1] + matrix[f-1][s]"];
+    SetOne --> AddToList["Add matrix[f][s] to currentList"];
+    SetValue --> AddToList;
+    AddToList --> UpdateIndices["f--, s++"];
+    UpdateIndices --> InnerLoop;
+    InnerLoop --> AddRow["Add currentList to triangle"];
+    AddRow --> OuterLoop;
+    OuterLoop --> EndLoop["End Loop"];
+    EndLoop --> Return["Return triangle"];
+    Return --> End["End"];
+```
+
+### Summary
+This solution generates Pascal's Triangle using a 2D array and a list of lists to store the values. It iteratively fills each row based on the sum of values from the previous rows, leveraging the properties of Pascal's Triangle. The algorithm runs in $O(n^2)$ time and space complexity, making it efficient for moderate values of `numRows`.
