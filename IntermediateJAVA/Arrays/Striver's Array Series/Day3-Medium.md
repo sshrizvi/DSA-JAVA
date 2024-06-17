@@ -80,6 +80,15 @@
     - [💾 Space Complexity](#-space-complexity-5)
     - [📊 Flowchart](#-flowchart-9)
     - [Summary](#summary-1)
+  - [Question 22 : Sort Colors](#question-22--sort-colors)
+    - [🧠 Intuition](#-intuition-10)
+    - [📚 Approach](#-approach-8)
+    - [📝 Detailed Walkthrough](#-detailed-walkthrough-9)
+    - [🔄 Code](#-code-8)
+    - [⏳ Time Complexity](#-time-complexity-3)
+    - [💾 Space Complexity](#-space-complexity-6)
+    - [📊 Flowchart](#-flowchart-10)
+    - [Summary](#summary-2)
 
 ## Question 13 : [Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/description/)
 
@@ -886,3 +895,75 @@ This function calculates the number of unique paths in a grid from the top-left 
 
 > [!IMPORTANT]
 > If you want to see all the approaches to solve the problem, [click here](https://takeuforward.org/data-structure/grid-unique-paths-count-paths-from-left-top-to-the-right-bottom-of-a-matrix/)
+
+## Question 22 : [Sort Colors](https://leetcode.com/problems/sort-colors/)
+
+### 🧠 Intuition
+The problem is to sort an array of numbers where each number represents a color: `0` (Red), `1` (White), and `2` (Blue). The goal is to sort the array in a single pass with constant space, which suggests the use of the **Dutch National Flag** algorithm.
+
+### 📚 Approach
+1. **Initialize three pointers**:
+   - `red` starts at the beginning of the array to track the position of the next red object.
+   - `blue` starts at the end of the array to track the position of the next blue object.
+   - `i` is used to iterate through the array.
+2. **Traverse the array**:
+   - If `nums[i]` is `2` (Blue), swap it with the element at the `blue` pointer and decrement `blue`.
+   - If `nums[i]` is `0` (Red), swap it with the element at the `red` pointer, increment `red` and `i`.
+   - If `nums[i]` is `1` (White), simply move to the next element by incrementing `i`.
+
+### 📝 Detailed Walkthrough
+1. **Initialize pointers**: Set `red = 0`, `i = 0`, and `blue = nums.length - 1`.
+2. **Iterate through the array**:
+   - While `i` is less than or equal to `blue`:
+     - If `nums[i] == 2` (Blue), swap `nums[i]` with `nums[blue]` and decrement `blue`.
+     - If `nums[i] == 0` (Red), swap `nums[i]` with `nums[red]`, increment `red` and `i`.
+     - If `nums[i] == 1` (White), simply increment `i`.
+
+### 🔄 Code
+```java
+public void sortColors(int[] nums) {
+    int red = 0, i = 0, blue = nums.length - 1;
+    while (i <= blue) {
+        if (nums[i] == 2) { // Handling Blue Objects
+            int temp = nums[i];
+            nums[i] = nums[blue];
+            nums[blue] = temp;
+            blue--;
+        } else if (nums[i] == 0) { // Handling Red Objects
+            int temp = nums[i];
+            nums[i] = nums[red];
+            nums[red] = temp;
+            red++;
+            i++;
+        } else {
+            i++;
+        }
+    }
+}
+```
+> [!NOTE]
+> To see full code, [click here](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/SortColors.java)
+
+### ⏳ Time Complexity
+The time complexity of this algorithm is $O(n)$ because we only make a single pass through the array.
+
+### 💾 Space Complexity
+The space complexity is $O(1)$ since we are using a constant amount of extra space for the pointers.
+
+### 📊 Flowchart
+```mermaid
+graph TD;
+    Start["Start"] --> Initialize["Initialize red = 0, i = 0, blue = nums.length - 1"];
+    Initialize --> Loop["While i <= blue"];
+    Loop --> |nums[i] == 2| HandleBlue["Swap nums[i] with nums[blue], Decrement blue"];
+    HandleBlue --> Loop;
+    Loop --> |nums[i] == 0| HandleRed["Swap nums[i] with nums[red], Increment red and i"];
+    HandleRed --> Loop;
+    Loop --> |nums[i] == 1| IncrementI["Increment i"];
+    IncrementI --> Loop;
+    Loop --> |End of loop| Return["Return"];
+    Return --> End["End"];
+```
+
+### Summary
+This function sorts an array of colors represented by `0`, `1`, and `2` in a single pass using the **Dutch National Flag** algorithm. The time complexity is $O(n)$ and the space complexity is $O(1)$, making it efficient and optimal for this problem.
