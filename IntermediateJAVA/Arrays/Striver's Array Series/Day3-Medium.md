@@ -89,6 +89,15 @@
     - [💾 Space Complexity](#-space-complexity-6)
     - [📊 Flowchart](#-flowchart-10)
     - [Summary](#summary-2)
+  - [Question 23 : Minimum Jumps to Reach End](#question-23--minimum-jumps-to-reach-end)
+    - [🧠 Intuition](#-intuition-11)
+    - [🚀 Approach](#-approach-9)
+    - [📜 Detailed Walkthrough](#-detailed-walkthrough-10)
+    - [🔍 Dry Run](#-dry-run)
+    - [🔢 Code](#-code-9)
+    - [📝 Complexity Analysis](#-complexity-analysis)
+    - [🗺️ Flowchart](#️-flowchart)
+    - [🎉 Summary](#-summary)
 
 ## Question 13 : [Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/description/)
 
@@ -967,3 +976,143 @@ graph TD;
 
 ### Summary
 This function sorts an array of colors represented by `0`, `1`, and `2` in a single pass using the **Dutch National Flag** algorithm. The time complexity is $O(n)$ and the space complexity is $O(1)$, making it efficient and optimal for this problem.
+
+## Question 23 : [Minimum Jumps to Reach End](https://www.geeksforgeeks.org/problems/minimum-number-of-jumps-1587115620/1)
+
+### 🧠 Intuition
+
+The goal is to find the minimum number of jumps required to reach the end of the array. Each element in the array represents the maximum jump length at that position. If it is not possible to reach the end, return `-1`.
+
+### 🚀 Approach
+
+1. **Initial Check**:
+   - If the array has only one element or is empty, no jumps are required.
+   - If the first element is `0`, it is not possible to move anywhere, so return `-1`.
+
+2. **Initialize Variables**:
+   - `jumps` to count the number of jumps.
+   - `l` and `r` to define the current range of positions we can reach.
+   - `farthest` to track the farthest position that can be reached.
+
+3. **Main Loop**:
+   - While the end of the array is not reached:
+     - Calculate the farthest position that can be reached within the current range.
+     - If the farthest position is not updated, return `-1` (stuck condition).
+     - Update the range and increment the jump count.
+
+### 📜 Detailed Walkthrough
+
+1. **Initial Checks**:
+   ```java
+   if (n == 0 || n == 1) return 0;
+   if (arr[0] == 0) return -1;
+   ```
+
+2. **Variable Initialization**:
+   ```java
+   int jumps = 1;
+   int l = 1, r = arr[0];
+   int farthest = arr[0];
+   ```
+
+3. **Main Loop**:
+   ```java
+   while (i < n - 1) {
+       if (r >= n - 1) return jumps;
+
+       int prevFarthest = farthest;
+       while (l <= r) {
+           farthest = Math.max(farthest, l + arr[l]);
+           l++;
+       }
+
+       if (farthest == prevFarthest) return -1;
+
+       l = r + 1;
+       r = farthest;
+       jumps++;
+   }
+   return jumps;
+   ```
+
+### 🔍 Dry Run
+
+Consider `arr = [2, 3, 1, 1, 4]` and `n = 5`.
+
+1. **Initialization**:
+   - `jumps = 1`
+   - `l = 1`, `r = 2`
+   - `farthest = 2`
+
+2. **First Loop**:
+   - `prevFarthest = 2`
+   - Update `farthest` while `l <= r`:
+     - `farthest = 4`
+     - `l = 2`
+   - New range: `l = 3`, `r = 4`
+   - Increment `jumps` to 2
+
+3. **Second Loop**:
+   - `r >= n - 1`, so return `jumps = 2`
+
+### 🔢 Code
+
+```java
+public static int minJumps(int[] arr, int n) {
+    int jumps = 1;
+    int l = 1, r = arr[0];
+    int i = 0;
+    int farthest = arr[0];
+    if (n == 0 || n == 1) return 0;
+    if (arr[0] == 0) return -1;
+    while (i < n - 1) {
+        if (r >= n - 1) return jumps;
+
+        int prevFarthest = farthest;
+
+        while (l <= r) {
+            farthest = Math.max(farthest, l + arr[l]);
+            l++;
+        }
+
+        if (farthest == prevFarthest) return -1;
+
+        l = r + 1;
+        r = farthest;
+        jumps++;
+    }
+    return jumps;
+}
+```
+
+> [!NOTE]
+> To see full code, [click here](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/MinimumJumps.java)
+
+
+### 📝 Complexity Analysis
+- **Time Complexity**: $O(n)$
+- **Space Complexity**: $O(1)$
+
+### 🗺️ Flowchart
+
+```mermaid
+graph TD;
+    Start["Start"] --> Init["Initialize jumps = 1, l = 1, r = arr[0], farthest = arr[0]"];
+    Init --> CheckBase["Check if n == 0 or n == 1 or arr[0] == 0"];
+    CheckBase -->|true| ReturnZero["Return 0"];
+    CheckBase -->|false| Loop["While i < n - 1"];
+    Loop -->|r >= n - 1| ReturnJumps["Return jumps"];
+    Loop -->|else| UpdatePrev["Set prevFarthest = farthest"];
+    UpdatePrev --> InnerLoop["While l <= r"];
+    InnerLoop --> UpdateFarthest["farthest = max(farthest, l + arr[l]), Increment l"];
+    InnerLoop -->|false| CheckStuck["If farthest == prevFarthest"];
+    CheckStuck -->|true| ReturnMinusOne["Return -1"];
+    CheckStuck -->|false| UpdateRange["Set l = r + 1, r = farthest, Increment jumps"];
+    UpdateRange --> Loop;
+    ReturnJumps --> End["End"];
+    ReturnMinusOne --> End;
+```
+
+### 🎉 Summary
+- We efficiently determine the minimum number of jumps needed to reach the end of the array using a greedy approach.
+- By checking the farthest reachable point within the current range, we ensure the solution is optimal.
