@@ -46,6 +46,7 @@ Hey, I am Syed Shujaat Haider and I am starting a new journey of learning DSA wi
 |  | Sort Colors | [LeetCode](https://leetcode.com/problems/sort-colors/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day3-Medium.md/#question-22--sort-colors) |
 |  | Minimum Jumps to reach End | [GeeksforGeeks](https://www.geeksforgeeks.org/problems/minimum-number-of-jumps-1587115620/1) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day3-Medium.md/#question-23--minimum-jumps-to-reach-end) |
 | (*Striver's Array Series - Day4 - Hard*) | Majority Element | [LeetCode](https://leetcode.com/problems/majority-element/description/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day4-Hard.md/#️-question-24--majority-element) |
+|  | Next Permutation | [LeetCode](https://leetcode.com/problems/next-permutation/description/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day4-Hard.md/#question-25--next-permutation) |
 <!-- |  |  | [LeetCode]() | [Notes]() | -->
 
 > 💡 **Tip**: Click on Notes to see detailed notes for a particular question. 
