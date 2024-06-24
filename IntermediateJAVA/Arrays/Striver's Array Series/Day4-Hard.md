@@ -27,6 +27,15 @@
     - [🗺️ Flowchart](#️-flowchart-2)
     - [📋 Summary](#-summary-2)
     - [📈 Complexity Analysis](#-complexity-analysis-1)
+  - [Question 27 : Merge Intervals](#question-27--merge-intervals)
+    - [🧠 Intuition](#-intuition-3)
+    - [🚀 Approach](#-approach-3)
+    - [📝 Detailed Walkthrough](#-detailed-walkthrough-3)
+    - [🔍 Dry Run](#-dry-run-3)
+    - [🔢 Code](#-code-3)
+    - [🗺️ Flowchart](#️-flowchart-3)
+    - [📋 Summary](#-summary-3)
+    - [📈 Complexity Analysis](#-complexity-analysis-2)
 
 ## 🗳️ Question 24 : [Majority Element](https://leetcode.com/problems/majority-element/description/)
 
@@ -400,3 +409,141 @@ The `majorityElement` method:
 > [!IMPORTANT]
 > - Article Link for the solution [Link](https://takeuforward.org/data-structure/majority-elementsn-3-times-find-the-elements-that-appears-more-than-n-3-times-in-the-array/)
 > - Video Link for the solution [Link](https://youtu.be/vwZj1K0e9U8)
+
+## Question 27 : [Merge Intervals](https://leetcode.com/problems/merge-intervals/description/)
+
+### 🧠 Intuition
+
+The problem is to merge overlapping intervals. This can be visualized by sorting the intervals by their starting points and then iterating through them to merge where overlaps occur. Overlapping intervals have the property that the start of one interval lies between the start and end of another interval.
+
+### 🚀 Approach
+
+1. **Sort the intervals** based on the starting point.
+2. **Iterate through the sorted intervals** and merge overlapping intervals by updating the end points.
+3. **Store non-overlapping intervals** in an output list.
+4. **Convert the output list** to a 2D array to return the result.
+
+### 📝 Detailed Walkthrough
+
+1. **Initialization**:
+   - An `ArrayList` is used to store the merged intervals.
+   - Sort the intervals based on the starting point using `Arrays.sort`.
+
+2. **Merge Logic**:
+   - Iterate through the sorted intervals.
+   - If the current interval overlaps with the next interval, merge them by updating the start and end points of the next interval.
+   - Mark the current interval as merged by setting its start and end points to `-1`.
+
+3. **Retrieve Merged Intervals**:
+   - Iterate through the intervals again.
+   - Add non-merged intervals to the output list.
+
+4. **Convert to 2D Array**:
+   - Convert the `ArrayList` to a 2D array for the final result.
+
+### 🔍 Dry Run
+
+**Input**: `[[1, 3], [2, 6], [8, 10], [15, 18]]`
+
+1. **Sort**:
+   - Sorted intervals: `[[1, 3], [2, 6], [8, 10], [15, 18]]`
+
+2. **Merge**:
+   - Iteration 1: `[[1, 6], [-1, -1], [8, 10], [15, 18]]`
+   - Iteration 2: No merge.
+   - Iteration 3: No merge.
+
+3. **Retrieve**:
+   - Result list: `[[1, 6], [8, 10], [15, 18]]`
+
+4. **Convert**:
+   - Final output: `[[1, 6], [8, 10], [15, 18]]`
+
+### 🔢 Code
+
+```java
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        ArrayList<int[]> output = new ArrayList<>();
+        // Sorting Matrix - Intervals
+        Arrays.sort(intervals, (a, b) -> Integer.compare(a[0], b[0]));
+        // Logic
+        for(int i = 0; i < intervals.length-1; i++){
+            if(intervals[i+1][0] >= intervals[i][0] && intervals[i+1][0] <= intervals[i][1]){
+                intervals[i+1][0] = Math.min(intervals[i][0], intervals[i+1][0]);
+                intervals[i+1][1] = Math.max(intervals[i][1], intervals[i+1][1]);
+                intervals[i][0] = -1;
+                intervals[i][1] = -1;
+            }
+        }
+        // Retreiving the Merged Intervals
+        for(int i = 0; i < intervals.length; i++){
+            if(intervals[i][0] == -1 && intervals[i][1] == -1) continue;
+            output.add(new int[]{intervals[i][0], intervals[i][1]});
+        }
+        // Converting the ArrayList to 2D matrix
+        int[][] mergedList = convertTo2DArray(output);
+        // Return Statement
+        return mergedList;
+    }
+
+    public static int[][] convertTo2DArray(ArrayList<int[]> list) {
+        if (list.isEmpty()) {
+            return new int[0][0];
+        }
+        int rowCount = list.size();
+        int colCount = list.get(0).length; // Assuming all rows have the same number of columns
+        int[][] matrix = new int[rowCount][colCount];
+        for (int i = 0; i < rowCount; i++) {
+            matrix[i] = list.get(i);
+        }
+        return matrix;
+    }
+}
+```
+> [!NOTE]
+> To see full code, [click here](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/MergeIntervals.java)
+
+### 🗺️ Flowchart
+
+```mermaid
+graph TD;
+    Start["Start"] --> Sort["Sort intervals by start point"];
+    Sort --> Iterate["Iterate through intervals"];
+    Iterate --> CheckOverlap["Check if current interval overlaps with next"];
+    CheckOverlap -->|Yes| Merge["Merge intervals"];
+    CheckOverlap -->|No| Continue["Continue to next interval"];
+    Merge --> MarkMerged["Mark current interval as merged"];
+    MarkMerged --> Iterate;
+    Continue --> Iterate;
+    Iterate --> Retrieve["Retrieve non-merged intervals"];
+    Retrieve --> Convert["Convert list to 2D array"];
+    Convert --> End["End"];
+```
+
+### 📋 Summary
+
+The `merge` method:
+1. **Sorts intervals** by their starting points.
+2. **Merges overlapping intervals** using a loop and conditions.
+3. **Stores non-overlapping intervals** in an output list.
+4. **Converts the list to a 2D array** for the final result.
+
+### 📈 Complexity Analysis
+
+- **Time Complexity**: $O(n log n)$ due to sorting, where `n` is the number of intervals.
+- **Space Complexity**: $O(n)$ for the output list and the final 2D array.
+
+> [!IMPORTANT]
+> - Article Link for the solution [Link]()
+> - Video Link for the solution [Link]()
+
+
+<!-- ## Question 00 : []()
+
+> [!NOTE]
+> To see full code, [click here]()
+
+> [!IMPORTANT]
+> - Article Link for the solution [Link]()
+> - Video Link for the solution [Link]() -->

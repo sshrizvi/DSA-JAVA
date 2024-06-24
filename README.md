@@ -48,6 +48,7 @@ Hey, I am Syed Shujaat Haider and I am starting a new journey of learning DSA wi
 | (*Striver's Array Series - Day4 - Hard*) | Majority Element | [LeetCode](https://leetcode.com/problems/majority-element/description/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day4-Hard.md/#️-question-24--majority-element) |
 |  | Next Permutation | [LeetCode](https://leetcode.com/problems/next-permutation/description/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day4-Hard.md/#question-25--next-permutation) |
 |  | Majority Element - II | [LeetCode](https://leetcode.com/problems/majority-element-ii/description/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day4-Hard.md/#question-26--majority-element---ii) |
+|  | Merge Intervals | [LeetCode](https://leetcode.com/problems/merge-intervals/description/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day4-Hard.md/#question-27--merge-intervals) |
 <!-- |  |  | [LeetCode]() | [Notes]() | -->
 
 > 💡 **Tip**: Click on Notes to see detailed notes for a particular question. 
