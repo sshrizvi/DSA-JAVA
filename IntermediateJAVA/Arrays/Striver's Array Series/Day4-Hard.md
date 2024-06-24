@@ -535,8 +535,8 @@ The `merge` method:
 - **Space Complexity**: $O(n)$ for the output list and the final 2D array.
 
 > [!IMPORTANT]
-> - Article Link for the solution [Link]()
-> - Video Link for the solution [Link]()
+> - Article Link for the solution [Link](https://takeuforward.org/data-structure/merge-overlapping-sub-intervals/)
+> - Video Link for the solution [Link](https://youtu.be/IexN60k62jo)
 
 
 <!-- ## Question 00 : []()
