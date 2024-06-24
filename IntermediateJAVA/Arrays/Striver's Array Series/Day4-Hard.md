@@ -36,6 +36,15 @@
     - [🗺️ Flowchart](#️-flowchart-3)
     - [📋 Summary](#-summary-3)
     - [📈 Complexity Analysis](#-complexity-analysis-2)
+  - [Question 28 : Merge Sorted Array](#question-28--merge-sorted-array)
+    - [🧠 Intuition](#-intuition-4)
+    - [🚀 Approach](#-approach-4)
+    - [📝 Detailed Walkthrough](#-detailed-walkthrough-4)
+    - [🔍 Dry Run](#-dry-run-4)
+    - [🔢 Code](#-code-4)
+    - [🗺️ Flowchart](#️-flowchart-4)
+    - [📋 Summary](#-summary-4)
+    - [📈 Complexity Analysis](#-complexity-analysis-3)
 
 ## 🗳️ Question 24 : [Majority Element](https://leetcode.com/problems/majority-element/description/)
 
@@ -538,6 +547,107 @@ The `merge` method:
 > - Article Link for the solution [Link](https://takeuforward.org/data-structure/merge-overlapping-sub-intervals/)
 > - Video Link for the solution [Link](https://youtu.be/IexN60k62jo)
 
+
+## Question 28 : [Merge Sorted Array](https://leetcode.com/problems/merge-sorted-array/)
+
+### 🧠 Intuition
+
+The problem is to merge two sorted arrays (`nums1` and `nums2`) into one sorted array in place. The `nums1` array has enough space to hold elements from both arrays. We can take advantage of the fact that both arrays are already sorted by starting the merge process from the end of both arrays.
+
+### 🚀 Approach
+
+1. **Initialize Pointers**:
+   - `i` for the last element in the initialized part of `nums1`.
+   - `j` for the last element in `nums2`.
+   - `k` for the last position in `nums1` (which can accommodate elements from both arrays).
+
+2. **Merge from the End**:
+   - Compare the elements pointed to by `i` and `j`.
+   - Place the larger element at the position pointed to by `k` in `nums1`.
+   - Move the respective pointer (`i`, `j`, or `k`) accordingly.
+
+3. **Repeat Until All Elements from `nums2` are Merged**:
+   - Continue the process until `j` becomes less than 0.
+
+### 📝 Detailed Walkthrough
+
+1. **Initialization**:
+   - `i = m - 1` points to the last initialized element in `nums1`.
+   - `j = n - 1` points to the last element in `nums2`.
+   - `k = m + n - 1` points to the last position in `nums1`.
+
+2. **Merge Process**:
+   - While `j >= 0`:
+     - If `i >= 0` and `nums1[i] > nums2[j]`, place `nums1[i]` at `nums1[k]` and decrement `i` and `k`.
+     - Otherwise, place `nums2[j]` at `nums1[k]` and decrement `j` and `k`.
+
+### 🔍 Dry Run
+
+**Input**: `nums1 = [1, 2, 3, 0, 0, 0]`, `m = 3`, `nums2 = [2, 5, 6]`, `n = 3`
+
+1. **Initialization**:
+   - `i = 2`, `j = 2`, `k = 5`
+
+2. **Merge**:
+   - `nums1[2] < nums2[2]` → `nums1[5] = nums2[2]` → `k = 4`, `j = 1`
+   - `nums1[2] < nums2[1]` → `nums1[4] = nums2[1]` → `k = 3`, `j = 0`
+   - `nums1[2] > nums2[0]` → `nums1[3] = nums1[2]` → `k = 2`, `i = 1`
+   - `nums1[1] < nums2[0]` → `nums1[2] = nums2[0]` → `k = 1`, `j = -1`
+
+3. **Result**:
+   - `nums1 = [1, 2, 2, 3, 5, 6]`
+
+### 🔢 Code
+
+```java
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int i = m - 1;
+        int j = n - 1;
+        int k = m + n - 1;
+        
+        while (j >= 0) {
+            if (i >= 0 && nums1[i] > nums2[j]) {
+                nums1[k--] = nums1[i--];
+            } else {
+                nums1[k--] = nums2[j--];
+            }
+        }
+    }
+}
+```
+> [!NOTE]
+> To see full code, [click here](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/MergeSortedArray.java)
+
+### 🗺️ Flowchart
+
+```mermaid
+graph TD;
+    Start["Start"] --> Init["Initialize i = m-1, j = n-1, k = m+n-1"];
+    Init --> Loop["While j >= 0"];
+    Loop --> Cond1{"i >= 0 and nums1[i] > nums2[j]"};
+    Cond1 -->|True| PlaceNums1["nums1[k] = nums1[i]; Decrement i, k"];
+    Cond1 -->|False| PlaceNums2["nums1[k] = nums2[j]; Decrement j, k"];
+    PlaceNums1 --> Loop;
+    PlaceNums2 --> Loop;
+    Loop -->|j < 0| End["End"];
+```
+
+### 📋 Summary
+
+The `merge` method:
+1. **Initializes pointers** for both arrays and the position in `nums1`.
+2. **Merges the arrays** from the end, ensuring sorted order.
+3. **Places elements** from `nums2` and `nums1` into their correct positions.
+
+### 📈 Complexity Analysis
+
+- **Time Complexity**: O(m + n) where `m` and `n` are the lengths of `nums1` and `nums2` respectively.
+- **Space Complexity**: O(1) as the merging is done in place.
+
+> [!IMPORTANT]
+> - Article Link for the solution [Link](https://takeuforward.org/data-structure/merge-two-sorted-arrays-without-extra-space/)
+> - Video Link for the solution [Link](https://youtu.be/n7uwj04E0I4)
 
 <!-- ## Question 00 : []()
 
