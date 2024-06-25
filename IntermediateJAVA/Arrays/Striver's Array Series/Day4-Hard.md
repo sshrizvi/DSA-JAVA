@@ -45,6 +45,13 @@
     - [🗺️ Flowchart](#️-flowchart-4)
     - [📋 Summary](#-summary-4)
     - [📈 Complexity Analysis](#-complexity-analysis-3)
+  - [Question 29 : Longest Consecutive Sequence](#question-29--longest-consecutive-sequence)
+    - [🧠 Intuition](#-intuition-5)
+    - [🚀 Approach](#-approach-5)
+    - [📝 Detailed Walkthrough](#-detailed-walkthrough-5)
+    - [🔢 Code](#-code-5)
+    - [🔍 Dry Run](#-dry-run-5)
+    - [🗺️ Flowchart](#️-flowchart-5)
 
 ## 🗳️ Question 24 : [Majority Element](https://leetcode.com/problems/majority-element/description/)
 
@@ -647,6 +654,120 @@ The `merge` method:
 
 > [!IMPORTANT]
 > - Article Link for the solution [Link](https://takeuforward.org/data-structure/merge-two-sorted-arrays-without-extra-space/)
+> - Video Link for the solution [Link](https://youtu.be/n7uwj04E0I4)
+
+## Question 29 : [Longest Consecutive Sequence](https://leetcode.com/problems/longest-consecutive-sequence/description/)
+
+### 🧠 Intuition
+The goal is to find the length of the longest consecutive sequence in an unsorted array of integers. Using a `HashSet` allows us to efficiently check for the existence of elements and ensures linear time complexity.
+
+### 🚀 Approach
+1. **Insert all elements into a `HashSet`:** This allows for O(1) average time complexity for checking the existence of an element.
+2. **Iterate through the set:** For each element, check if it is the start of a sequence (i.e., the element before it does not exist in the set). If it is, count the length of the consecutive sequence starting from this element.
+3. **Track the maximum length:** Keep a variable to store the maximum length of consecutive sequences found.
+
+### 📝 Detailed Walkthrough
+1. **Initialization:**
+   - If the input array is empty, return 0.
+   - Create a `HashSet` and add all elements from the array to the set.
+
+2. **Iterate through the set:**
+   - For each element, check if it is the start of a sequence by checking if `x - 1` is not in the set.
+   - If it is the start, count the length of the sequence by incrementing and checking for subsequent elements in the set.
+   - Update the maximum length if the current sequence length is greater than the previous maximum.
+
+3. **Return the maximum length found.**
+
+### 🔢 Code
+```java
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        if (nums.length == 0) return 0; // Base case: empty array
+
+        HashSet<Integer> set = new HashSet<>();
+        for (int num : nums) set.add(num); // Add all elements to the set
+
+        int maxLength = 1; // To store the maximum length of consecutive sequence
+        int currentLength = 0; // To store the current sequence length
+
+        for (int x : set) {
+            // If x is the start of a sequence
+            if (set.contains(x - 1)) continue;
+            
+            int y = x;
+            while (set.contains(y++)) currentLength++; // Count the length of the sequence
+            
+            maxLength = Math.max(maxLength, currentLength); // Update maximum length
+            currentLength = 0; // Reset current length for the next sequence
+        }
+
+        return maxLength;
+    }
+}
+```
+
+> [!NOTE]
+> To see full code, [click here](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/LongestConsecutiveSequence.java)
+
+### 🔍 Dry Run
+Let's dry run the code with the input array: `[100, 4, 200, 1, 3, 2]`.
+
+1. **Initialization:**
+   - `set` = `{100, 4, 200, 1, 3, 2}`
+   - `maxLength` = 1
+   - `currentLength` = 0
+
+2. **Iteration:**
+   - For `x = 1`:
+     - Start of a sequence.
+     - Count sequence: `1, 2, 3, 4` (currentLength = 4)
+     - Update `maxLength` to 4.
+   - For `x = 2`:
+     - Not the start of a sequence (`1` exists in the set).
+   - For `x = 3`:
+     - Not the start of a sequence (`2` exists in the set).
+   - For `x = 4`:
+     - Not the start of a sequence (`3` exists in the set).
+   - For `x = 100`:
+     - Start of a sequence.
+     - Count sequence: `100` (currentLength = 1)
+     - `maxLength` remains 4.
+   - For `x = 200`:
+     - Start of a sequence.
+     - Count sequence: `200` (currentLength = 1)
+     - `maxLength` remains 4.
+
+3. **Return `maxLength`:**
+   - The final `maxLength` is 4.
+
+### 🗺️ Flowchart
+```mermaid
+graph TD;
+    Start["Start"] --> CheckEmpty["Is nums array empty?"]
+    CheckEmpty -->|Yes| ReturnZero["Return 0"]
+    CheckEmpty -->|No| InitializeSet["Initialize HashSet and add all elements"]
+    InitializeSet --> InitializeVars["Initialize maxLength = 1, currentLength = 0"]
+    InitializeVars --> IterateSet["Iterate through each element in the set"]
+    
+    IterateSet --> CheckStart["Is (x - 1) not in set?"]
+    CheckStart -->|No| ContinueIterate["Continue to next element"]
+    ContinueIterate --> IterateSet
+    CheckStart -->|Yes| InitializeY["Initialize y = x"]
+    
+    InitializeY --> CountSequence["While set contains y, increment y and currentLength"]
+    CountSequence --> UpdateMax["Update maxLength if currentLength > maxLength"]
+    UpdateMax --> ResetCurrentLength["Reset currentLength to 0"]
+    ResetCurrentLength --> IterateSet
+    
+    IterateSet --> EndIterate["End of iteration"]
+    EndIterate --> ReturnMax["Return maxLength"]
+    ReturnMax --> End["End"]
+```
+
+This approach ensures you efficiently find the longest consecutive sequence in linear time while using additional space for the `HashSet`.
+
+> [!IMPORTANT]
+> - Article Link for the solution [Link](https://takeuforward.org/data-structure/longest-consecutive-sequence-in-an-array/)
 > - Video Link for the solution [Link](https://youtu.be/n7uwj04E0I4)
 
 <!-- ## Question 00 : []()
