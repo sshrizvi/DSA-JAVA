@@ -51,6 +51,7 @@ Hey, I am Syed Shujaat Haider and I am starting a new journey of learning DSA wi
 |  | Merge Intervals | [LeetCode](https://leetcode.com/problems/merge-intervals/description/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day4-Hard.md/#question-27--merge-intervals) |
 |  | Merge Sorted Array | [LeetCode](https://leetcode.com/problems/merge-sorted-array/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day4-Hard.md/#question-28--merge-sorted-array) |
 |  | Longest Consecutive Sequence | [LeetCode](https://leetcode.com/problems/longest-consecutive-sequence/description/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day4-Hard.md/#question-29--longest-consecutive-sequence) |
+|  | Longest Subarray with Sum K | [GeeksForGeeks](https://www.geeksforgeeks.org/problems/longest-sub-array-with-sum-k0809/1) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day4-Hard.md/#question-30--longest-subarray-with-sum-k) |
 <!-- |  |  | [LeetCode]() | [Notes]() | -->
 
 > 💡 **Tip**: Click on Notes to see detailed notes for a particular question. 

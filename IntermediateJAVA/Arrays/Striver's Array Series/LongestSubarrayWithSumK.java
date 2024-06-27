@@ -1,5 +1,4 @@
 import java.util.HashMap;
-import java.util.Map;
 
 public class LongestSubarrayWithSumK {
     // Brute - Force
@@ -25,11 +24,8 @@ public class LongestSubarrayWithSumK {
         for(int i = 0; i < N; i++){
             prefixSum += A[i];
             map.putIfAbsent(prefixSum, i);
-            if(prefixSum == K) maxL = Math.max(maxL,map.get(prefixSum)+1);
+            if(prefixSum == K) maxL = Math.max(maxL, i+1);
             else maxL = Math.max(maxL, i - map.getOrDefault(prefixSum-K, Integer.MAX_VALUE));
-        }
-        for(Map.Entry<Integer,Integer> entry : map.entrySet()){
-            System.out.println(entry.getKey() + " : " + entry.getValue());
         }
         return maxL;
     }

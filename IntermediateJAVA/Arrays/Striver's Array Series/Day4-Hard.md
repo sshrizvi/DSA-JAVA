@@ -52,6 +52,13 @@
     - [🔢 Code](#-code-5)
     - [🔍 Dry Run](#-dry-run-5)
     - [🗺️ Flowchart](#️-flowchart-5)
+  - [Question 30 : Longest Subarray with Sum K](#question-30--longest-subarray-with-sum-k)
+    - [💡 Intuition](#-intuition-6)
+    - [🚀 Approach](#-approach-6)
+    - [📝 Detailed Walkthrough](#-detailed-walkthrough-6)
+    - [🏃 Dry Run Example](#-dry-run-example)
+    - [💻 Code](#-code-6)
+    - [🌐 Flowchart](#-flowchart)
 
 ## 🗳️ Question 24 : [Majority Element](https://leetcode.com/problems/majority-element/description/)
 
@@ -769,6 +776,90 @@ This approach ensures you efficiently find the longest consecutive sequence in l
 > [!IMPORTANT]
 > - Article Link for the solution [Link](https://takeuforward.org/data-structure/longest-consecutive-sequence-in-an-array/)
 > - Video Link for the solution [Link](https://youtu.be/n7uwj04E0I4)
+
+## Question 30 : [Longest Subarray with Sum K](https://www.geeksforgeeks.org/problems/longest-sub-array-with-sum-k0809/1)
+
+### 💡 Intuition 
+To find the length of the longest subarray with a given sum $K$, we can utilize a `HashMap` to store the prefix sums and their corresponding indices. By leveraging the prefix sum technique, we can efficiently determine subarrays that add up to $K$.
+
+### 🚀 Approach 
+1. **Initialize a `HashMap` and variables:**
+   - `map` to store prefix sums and their indices.
+   - `prefixSum` to keep track of the cumulative sum.
+   - `maxL` to store the maximum length of subarray found.
+2. **Iterate through the array:**
+   - Update the `prefixSum` with the current element.
+   - Store the first occurrence of each `prefixSum` in the `map`.
+   - Check if the current `prefixSum` equals $K$.
+   - Check if there exists a subarray with sum $K$ using the difference between the current `prefixSum` and $K$.
+
+### 📝 Detailed Walkthrough 
+1. **Initialization:**
+   - Create a `HashMap` called `map` to store prefix sums and their indices.
+   - Initialize `prefixSum` to 0 and `maxL` to 0.
+2. **Iterate through the array $A$:**
+   - For each element $A[i]$, add it to `prefixSum`.
+   - Use `map.putIfAbsent(prefixSum, i)` to store the index of the first occurrence of `prefixSum`.
+   - If `prefixSum` equals $K$, update `maxL` to the maximum of its current value and $i + 1$.
+   - Check if `prefixSum - K` exists in `map`. If it does, update `maxL` to the maximum of its current value and the difference between the current index $i$ and the index stored in `map` for `prefixSum - K`.
+
+### 🏃 Dry Run Example 
+For `A = [10, 5, 2, 7, 1, 9]` and $K = 15$:
+1. **Initialization:**
+   - `map = {}`
+   - `prefixSum = 0`
+   - `maxL = 0`
+2. **Iteration:**
+   - For $i = 0$ : `prefixSum = 10`, `map = {10: 0}`
+   - For $i = 1$ : `prefixSum = 15`, `maxL = 2` (subarray [10, 5]), `map = {10: 0, 15: 1}`
+   - For $i = 2$ : `prefixSum = 17`, `map = {10: 0, 15: 1, 17: 2}`
+   - For $i = 3$ : `prefixSum = 24`, `maxL = 2`, `map = {10: 0, 15: 1, 17: 2, 24: 3}`
+   - For $i = 4$ : `prefixSum = 25`, `maxL = 2`, `map = {10: 0, 15: 1, 17: 2, 24: 3, 25: 4}`
+   - For $i = 5$ : `prefixSum = 34`, `maxL = 3` (subarray [7, 1, 9]), `map = {10: 0, 15: 1, 17: 2, 24: 3, 25: 4, 34: 5}`
+
+Final `maxL` is `3`.
+
+### 💻 Code 
+```java
+public static int lenOfLongSubarr2 (int A[], int N, int K) {
+    HashMap<Integer, Integer> map = new HashMap<>();
+    int prefixSum = 0, maxL = 0;
+    for (int i = 0; i < N; i++) {
+        prefixSum += A[i];
+        map.putIfAbsent(prefixSum, i);
+        if (prefixSum == K) maxL = Math.max(maxL, i + 1);
+        else maxL = Math.max(maxL, i - map.getOrDefault(prefixSum - K, Integer.MAX_VALUE));
+    }
+    return maxL;
+}
+```
+> [!NOTE]
+> To see full code, [click here](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/LongestSubarrayWithSumK.java)
+
+### 🌐 Flowchart 
+```mermaid
+graph TD;
+    A[Start] --> B[Initialize map, prefixSum, maxL]
+    B --> C[Iterate through array A]
+    C --> D[Update prefixSum with A[i]]
+    D --> E[map.putIfAbsent(prefixSum, i)]
+    E --> F{prefixSum == K?}
+    F --> |Yes| G[Update maxL to i + 1]
+    F --> |No| H[Check if prefixSum - K exists in map]
+    H --> I{Exists?}
+    I --> |Yes| J[Update maxL to max(maxL, i - map.get(prefixSum - K))]
+    I --> |No| K[Continue loop]
+    G --> K
+    J --> K
+    K --> C
+    C --> L[Return maxL]
+    L --> M[End]
+```
+
+> [!IMPORTANT]
+> - Article Link for the solution [Link](https://takeuforward.org/arrays/longest-subarray-with-sum-k-postives-and-negatives/)
+> - Video Link for the solution [Link](https://youtu.be/frf7qxiN2qU)
+
 
 <!-- ## Question 00 : []()
 
