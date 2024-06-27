@@ -59,6 +59,16 @@
     - [🏃 Dry Run Example](#-dry-run-example)
     - [💻 Code](#-code-6)
     - [🌐 Flowchart](#-flowchart)
+  - [Question 31 : Subarray Sum Equals K](#question-31--subarray-sum-equals-k)
+  - [Intuition 💡](#intuition-)
+  - [Approach 🚀](#approach-)
+  - [Detailed Walkthrough 📝](#detailed-walkthrough-)
+  - [Dry Run 🏃‍♂️](#dry-run-️)
+    - [Example: `nums = {1, -1, 0}`, `k = 0`](#example-nums--1--1-0-k--0)
+    - [Result](#result)
+  - [Code 💻](#code-)
+  - [Flowchart 🖼️](#flowchart-️)
+    - [Complexity Analysis 📊](#complexity-analysis-)
 
 ## 🗳️ Question 24 : [Majority Element](https://leetcode.com/problems/majority-element/description/)
 
@@ -859,6 +869,108 @@ graph TD;
 > [!IMPORTANT]
 > - Article Link for the solution [Link](https://takeuforward.org/arrays/longest-subarray-with-sum-k-postives-and-negatives/)
 > - Video Link for the solution [Link](https://youtu.be/frf7qxiN2qU)
+
+
+## Question 31 : [Subarray Sum Equals K](https://leetcode.com/problems/subarray-sum-equals-k/)
+
+## Intuition 💡
+The problem is to find the number of continuous subarrays whose sum equals to `k`. We use a hashmap to keep track of the cumulative sum (`prefixSum`) and the number of times this sum has occurred. This way, we can efficiently determine if there is a subarray sum that equals `k`.
+
+## Approach 🚀
+1. **HashMap Initialization**: Initialize a hashmap to store cumulative sums and their counts.
+2. **Prefix Sum Calculation**: Traverse through the array, updating the cumulative sum (`prefixSum`) and checking if the difference between `prefixSum` and `k` exists in the hashmap.
+3. **Count Update**: If the difference exists, add the count of that difference to the result count.
+4. **HashMap Update**: Update the hashmap with the current cumulative sum.
+
+## Detailed Walkthrough 📝
+1. **Initialization**: 
+   - `count = 0`: To store the number of valid subarrays.
+   - `prefixSum = 0`: To store the cumulative sum of elements.
+   - `map = new HashMap<>()`: To store cumulative sums and their counts.
+   - `map.put(0, 1)`: Initialize with 0 sum having one count to handle subarrays starting from index 0.
+
+2. **Iteration**:
+   - For each element in the array:
+     - Update `prefixSum` by adding the current element.
+     - Check if `(prefixSum - k)` exists in the hashmap.
+     - If exists, add the count of `(prefixSum - k)` to `count`.
+     - Update the hashmap with the current `prefixSum`.
+
+## Dry Run 🏃‍♂️
+### Example: `nums = {1, -1, 0}`, `k = 0`
+1. **Initial State**:
+   - `count = 0`
+   - `prefixSum = 0`
+   - `map = {0: 1}`
+
+2. **First Iteration (i = 0)**:
+   - `prefixSum = 1` (1 + 0)
+   - `prefixSum - k = 1 - 0 = 1` (not in map)
+   - Update `map`: `{0: 1, 1: 1}`
+
+3. **Second Iteration (i = 1)**:
+   - `prefixSum = 0` (1 - 1)
+   - `prefixSum - k = 0 - 0 = 0` (exists in map)
+   - `count += map.get(0) = 1`
+   - `count = 1`
+   - Update `map`: `{0: 2, 1: 1}`
+
+4. **Third Iteration (i = 2)**:
+   - `prefixSum = 0` (0 + 0)
+   - `prefixSum - k = 0 - 0 = 0` (exists in map)
+   - `count += map.get(0) = 2`
+   - `count = 3`
+   - Update `map`: `{0: 3, 1: 1}`
+
+### Result
+- `count = 3`
+
+## Code 💻
+```java
+public static int subarraySum(int[] nums, int k) {
+    int count = 0, prefixSum = 0;
+    HashMap<Integer, Integer> map = new HashMap<>();
+    map.put(0, 1); // To handle the case where the subarray starts from index 0
+    for(int i = 0; i < nums.length; i++){
+        prefixSum += nums[i];
+        if(map.containsKey(prefixSum - k)) {
+            count += map.get(prefixSum - k);
+        }
+        map.put(prefixSum, map.getOrDefault(prefixSum, 0) + 1);
+    }
+    return count;
+}
+```
+> [!NOTE]
+> To see full code, [click here](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/SubarraySumEqualsK.java)
+
+## Flowchart 🖼️
+```mermaid
+graph TD
+    A[Start] --> B[Initialize variables: count, prefixSum, map]
+    B --> C[Iterate over nums array]
+    C --> D["Update prefixSum with nums[i]"]
+    D --> E{"Check if (prefixSum - k) is in map"}
+    E -->|Yes| F["Update count with map.get(prefixSum - k)"]
+    E -->|No| G[Do nothing]
+    F --> H[Update map with prefixSum]
+    G --> H[Update map with prefixSum]
+    H -->|More elements| C
+    H -->|No more elements| I[Return count]
+    I --> J[End]
+```
+
+### Complexity Analysis 📊
+
+1. ***Time Complexity*** ⏱️
+   - **O(n)**: The algorithm traverses the array only once. Each lookup and insertion in the hashmap takes O(1) time on average. Hence, the overall time complexity is O(n), where n is the length of the array.
+2. ***Space Complexity*** 🧠
+   - **O(n)**: In the worst case, all elements could have different prefix sums, resulting in storing n prefix sums in the hashmap. Thus, the space complexity is O(n).
+
+
+> [!IMPORTANT]
+> - Article Link for the solution [Link](https://takeuforward.org/arrays/count-subarray-sum-equals-k/)
+> - Video Link for the solution [Link](https://youtu.be/xvNwoz-ufXA)
 
 
 <!-- ## Question 00 : []()
