@@ -841,14 +841,14 @@ public static int lenOfLongSubarr2 (int A[], int N, int K) {
 graph TD;
     A[Start] --> B[Initialize map, prefixSum, maxL]
     B --> C[Iterate through array A]
-    C --> D[Update prefixSum with A[i]]
-    D --> E[map.putIfAbsent(prefixSum, i)]
+    C --> D["Update prefixSum with A[i]"]
+    D --> E["map.putIfAbsent(prefixSum, i)"]
     E --> F{prefixSum == K?}
-    F --> |Yes| G[Update maxL to i + 1]
-    F --> |No| H[Check if prefixSum - K exists in map]
+    F -->|Yes| G[Update maxL to i + 1]
+    F -->|No| H[Check if prefixSum - K exists in map]
     H --> I{Exists?}
-    I --> |Yes| J[Update maxL to max(maxL, i - map.get(prefixSum - K))]
-    I --> |No| K[Continue loop]
+    I -->|Yes| J["Update maxL to max(maxL, i - map.get(prefixSum - K))"]
+    I -->|No| K[Continue loop]
     G --> K
     J --> K
     K --> C
