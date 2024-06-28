@@ -77,6 +77,13 @@
     - [Code 💻](#code--1)
     - [Flowchart 🖼️](#flowchart-️-1)
     - [Complexity Analysis 📊](#complexity-analysis--1)
+  - [Question 33 : XOR Queries of a Subarray](#question-33--xor-queries-of-a-subarray)
+    - [Intuition 💡](#intuition--2)
+    - [Approach 🚀](#approach--2)
+    - [Code 💻](#code--2)
+    - [Dry Run 🏃‍♂️](#dry-run-️-2)
+    - [Flowchart 🖼️](#flowchart-️-2)
+    - [Complexity Analysis 📊](#complexity-analysis--2)
 
 ## 🗳️ Question 24 : [Majority Element](https://leetcode.com/problems/majority-element/description/)
 
@@ -1094,6 +1101,108 @@ graph TD
 > [!IMPORTANT]
 > - Article Link for the solution [Link](https://takeuforward.org/data-structure/count-the-number-of-subarrays-with-given-xor-k/)
 > - Video Link for the solution [Link](https://youtu.be/eZr-6p0B7ME)
+
+
+## Question 33 : [XOR Queries of a Subarray](https://leetcode.com/problems/xor-queries-of-a-subarray/)
+
+### Intuition 💡
+The goal is to find the XOR of elements between two indices for multiple queries efficiently. Using a prefix XOR array helps in reducing the time complexity for each query.
+
+### Approach 🚀
+1. **Prefix XOR Calculation**:
+   - Create a prefix XOR array where each element at index `i` contains the XOR of all elements from the start to `i`.
+   - This helps in computing the XOR of any subarray in constant time.
+
+2. **Query Processing**:
+   - For each query, use the prefix XOR array to find the XOR of the subarray.
+   - If `left` is the starting index, and `right` is the ending index:
+     - XOR from `left` to `right` can be found using the formula: `prefixXOR[right] ^ prefixXOR[left-1]`.
+     - Handle the edge case where `left` is `0` by directly using `prefixXOR[right]`.
+
+### Code 💻
+```java
+public class Solution {
+    public int[] xorQueries(int[] arr, int[][] queries) {
+        int[] answer = new int[queries.length];
+        int[] prefixXOR = new int[arr.length];
+        
+        // Step 1: Calculate prefix XOR array
+        prefixXOR[0] = arr[0];
+        for(int i = 1; i < arr.length; i++){
+            prefixXOR[i] = prefixXOR[i-1] ^ arr[i];
+        }
+        
+        // Step 2: Process each query using prefix XOR array
+        for(int i = 0; i < queries.length; i++){
+            int left = queries[i][0];
+            int right = queries[i][1];
+            if(left == 0){
+                answer[i] = prefixXOR[right];
+            } else {
+                answer[i] = prefixXOR[right] ^ prefixXOR[left-1];
+            }
+        }
+        
+        return answer;
+    }
+}
+```
+> [!NOTE]
+> To see full code, [click here](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/XORQueriesOfASubarray.java)
+
+### Dry Run 🏃‍♂️
+Example: `arr = [1,3,4,8]`, `queries = [[0,1],[1,2],[0,3],[3,3]]`
+1. **Initial State**:
+   - `arr = [1, 3, 4, 8]`
+   - `queries = [[0,1],[1,2],[0,3],[3,3]]`
+
+2. **Prefix XOR Calculation**:
+   - `prefixXOR[0] = 1`
+   - `prefixXOR[1] = 1 ^ 3 = 2`
+   - `prefixXOR[2] = 2 ^ 4 = 6`
+   - `prefixXOR[3] = 6 ^ 8 = 14`
+   - `prefixXOR = [1, 2, 6, 14]`
+
+3. **Query Processing**:
+   - Query `[0,1]`: `prefixXOR[1] = 2`
+   - Query `[1,2]`: `prefixXOR[2] ^ prefixXOR[0] = 6 ^ 1 = 7`
+   - Query `[0,3]`: `prefixXOR[3] = 14`
+   - Query `[3,3]`: `prefixXOR[3] ^ prefixXOR[2] = 14 ^ 6 = 8`
+   - Result: `[2, 7, 14, 8]`
+
+### Flowchart 🖼️
+```mermaid
+graph TD
+    A[Start] --> B[Initialize answer array]
+    B --> C[Calculate prefix XOR array]
+    C --> D[Iterate through queries]
+    D --> E[For each query, determine left and right indices]
+    E --> F{Is left == 0?}
+    F -->|Yes| G["answer[i] = prefixXOR[right]"]
+    F -->|No| H["answer[i] = prefixXOR[right] ^ prefixXOR[left-1]"]
+    G --> I[Move to next query]
+    H --> I[Move to next query]
+    I -->|More queries| D
+    I -->|No more queries| J[Return answer array]
+    J --> K[End]
+```
+
+### Complexity Analysis 📊
+
+1. ***Time Complexity*** ⏱️
+- $O(n + m)$:
+  - `O(n)` for calculating the prefix XOR array.
+  - `O(m)` for processing the `m` queries.
+
+2. ***Space Complexity*** 🧠
+- $O(n)$:
+  - Space for the prefix XOR array.
+
+This approach ensures efficient handling of the XOR queries using the prefix XOR technique, which allows subarray XOR computation in constant time.
+
+> [!IMPORTANT]
+> - Article Link for the solution [Link](https://leetcode.com/problems/xor-queries-of-a-subarray/solutions/5383240/easy-prefix-xor-approach-java-optimal-solution/)
+> - Video Link for the solution [Link](https://youtu.be/vc7XCIbRig8)
 
 
 <!-- ## Question 00 : []()
