@@ -69,6 +69,14 @@
   - [Code 💻](#code-)
   - [Flowchart 🖼️](#flowchart-️)
     - [Complexity Analysis 📊](#complexity-analysis-)
+  - [Question 32 : Subarrays with given XOR](#question-32--subarrays-with-given-xor)
+    - [Intuition 💡](#intuition--1)
+    - [Approach 🚀](#approach--1)
+    - [Detailed Walkthrough 📝](#detailed-walkthrough--1)
+    - [Dry Run 🏃‍♂️](#dry-run-️-1)
+    - [Code 💻](#code--1)
+    - [Flowchart 🖼️](#flowchart-️-1)
+    - [Complexity Analysis 📊](#complexity-analysis--1)
 
 ## 🗳️ Question 24 : [Majority Element](https://leetcode.com/problems/majority-element/description/)
 
@@ -971,6 +979,121 @@ graph TD
 > [!IMPORTANT]
 > - Article Link for the solution [Link](https://takeuforward.org/arrays/count-subarray-sum-equals-k/)
 > - Video Link for the solution [Link](https://youtu.be/xvNwoz-ufXA)
+
+
+## Question 32 : [Subarrays with given XOR](https://www.interviewbit.com/problems/subarray-with-given-xor/)
+
+### Intuition 💡
+The goal is to find the number of subarrays whose XOR equals a given value `B`. The idea is to use a hashmap to store the XOR values encountered so far and their frequencies. This helps in efficiently finding the count of subarrays that meet the condition.
+
+### Approach 🚀
+1. **HashMap Initialization**: Initialize a hashmap to store XOR values and their counts.
+2. **XOR Calculation**: Traverse through the array, updating the cumulative XOR.
+3. **Count Update**: Check if `(XOR ^ B)` exists in the hashmap. If it does, add the count of this XOR to the result count.
+4. **HashMap Update**: Update the hashmap with the current XOR.
+
+### Detailed Walkthrough 📝
+1. **Initialization**: 
+   - `map = new HashMap<>()`: To store XOR values and their counts.
+   - `map.put(0, 1)`: Initialize with XOR 0 having one count to handle subarrays starting from index 0.
+   - `XOR = 0`: To store the cumulative XOR of elements.
+   - `count = 0`: To store the number of valid subarrays.
+
+2. **Iteration**:
+   - For each element in the array:
+     - Update `XOR` by applying XOR with the current element.
+     - Check if `(XOR ^ B)` exists in the hashmap.
+     - If exists, add the count of `(XOR ^ B)` to `count`.
+     - Update the hashmap with the current XOR.
+
+### Dry Run 🏃‍♂️
+Example: `A = [4, 2, 2, 6, 4]`, `B = 6`
+1. **Initial State**:
+   - `count = 0`
+   - `XOR = 0`
+   - `map = {0: 1}`
+
+2. **First Iteration (x = 4)**:
+   - `XOR = 4` (0 ^ 4)
+   - `XOR ^ B = 4 ^ 6 = 2` (not in map)
+   - Update `map`: `{0: 1, 4: 1}`
+
+3. **Second Iteration (x = 2)**:
+   - `XOR = 6` (4 ^ 2)
+   - `XOR ^ B = 6 ^ 6 = 0` (exists in map)
+   - `count += map.get(0) = 1`
+   - `count = 1`
+   - Update `map`: `{0: 1, 4: 1, 6: 1}`
+
+4. **Third Iteration (x = 2)**:
+   - `XOR = 4` (6 ^ 2)
+   - `XOR ^ B = 4 ^ 6 = 2` (not in map)
+   - Update `map`: `{0: 1, 4: 2, 6: 1}`
+
+5. **Fourth Iteration (x = 6)**:
+   - `XOR = 2` (4 ^ 6)
+   - `XOR ^ B = 2 ^ 6 = 4` (exists in map)
+   - `count += map.get(4) = 2`
+   - `count = 3`
+   - Update `map`: `{0: 1, 4: 2, 6: 1, 2: 1}`
+
+6. **Fifth Iteration (x = 4)**:
+   - `XOR = 6` (2 ^ 4)
+   - `XOR ^ B = 6 ^ 6 = 0` (exists in map)
+   - `count += map.get(0) = 1`
+   - `count = 4`
+   - Update `map`: `{0: 1, 4: 2, 6: 2, 2: 1}`
+
+7. **Result**
+   - `count = 4`
+
+### Code 💻
+```java
+public static int solve(ArrayList<Integer> A, int B) {
+    HashMap<Integer,Integer> map = new HashMap<>();
+    map.put(0,1);
+    int XOR = 0, count = 0;
+    for(int x : A){
+        XOR ^= x;
+        if(map.containsKey(XOR ^ B)){
+            count += map.get(XOR ^ B);
+        }
+        map.put(XOR, map.getOrDefault(XOR, 0) + 1);
+    }
+    return count;
+}
+```
+> [!NOTE]
+> To see full code, [click here](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/SubarrayWithGivenXOR.java)
+
+### Flowchart 🖼️
+```mermaid
+graph TD
+    A[Start] --> B["Initialize map with (0,1)"]
+    B --> C[Initialize XOR and count to 0]
+    C --> D[Iterate over each element in A]
+    D --> E[Update XOR with current element]
+    E --> F{"Is (XOR ^ B) in map ?"}
+    F -->|Yes| G["Update count with map.get(XOR ^ B)"]
+    F -->|No| H[Do nothing]
+    G --> I[Update map with current XOR]
+    H --> I[Update map with current XOR]
+    I -->|More elements| D
+    I -->|No more elements| J[Return count]
+    J --> K[End]
+```
+
+### Complexity Analysis 📊
+
+1. ***Time Complexity*** ⏱️
+- $O(n)$: The algorithm traverses the array only once. Each lookup and insertion in the hashmap takes O(1) time on average. Hence, the overall time complexity is O(n), where n is the length of the array.
+
+2. ***Space Complexity*** 🧠
+- $O(n)$: In the worst case, all elements could have different XOR values, resulting in storing n XOR values in the hashmap. Thus, the space complexity is O(n).
+
+> [!IMPORTANT]
+> - Article Link for the solution [Link](https://takeuforward.org/data-structure/count-the-number-of-subarrays-with-given-xor-k/)
+> - Video Link for the solution [Link](https://youtu.be/eZr-6p0B7ME)
 
 
 <!-- ## Question 00 : []()

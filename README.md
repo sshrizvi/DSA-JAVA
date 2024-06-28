@@ -53,6 +53,7 @@ Hey, I am Syed Shujaat Haider and I am starting a new journey of learning DSA wi
 |  | Longest Consecutive Sequence | [LeetCode](https://leetcode.com/problems/longest-consecutive-sequence/description/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day4-Hard.md/#question-29--longest-consecutive-sequence) |
 |  | Longest Subarray with Sum K | [GeeksForGeeks](https://www.geeksforgeeks.org/problems/longest-sub-array-with-sum-k0809/1) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day4-Hard.md/#question-30--longest-subarray-with-sum-k) |
 |  | Subarray Sum Equals K | [LeetCode](https://leetcode.com/problems/subarray-sum-equals-k/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day4-Hard.md/#question-31--subarray-sum-equals-k) |
+|  | Subarray with given XOR | [InterviewBit](https://www.interviewbit.com/problems/subarray-with-given-xor/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day4-Hard.md/#question-32--subarrays-with-given-xor) |
 <!-- |  |  | [LeetCode]() | [Notes]() | -->
 
 > 💡 **Tip**: Click on Notes to see detailed notes for a particular question. 
