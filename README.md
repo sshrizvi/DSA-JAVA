@@ -55,7 +55,7 @@ Hey, I am Syed Shujaat Haider and I am starting a new journey of learning DSA wi
 |  | Subarray Sum Equals K | [LeetCode](https://leetcode.com/problems/subarray-sum-equals-k/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day4-Hard.md/#question-31--subarray-sum-equals-k) |
 |  | Subarray with given XOR | [InterviewBit](https://www.interviewbit.com/problems/subarray-with-given-xor/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day4-Hard.md/#question-32--subarrays-with-given-xor) |
 |  | XOR Queries of a Subarray | [LeetCode](https://leetcode.com/problems/xor-queries-of-a-subarray/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day4-Hard.md/#question-33--xor-queries-of-a-subarray) |
-| (*Striver's Array Series - Day5 - Expert*) | Three Sum | [LeetCode](https://leetcode.com/problems/3sum/description/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day5-Expert.md/#strivers-array-series-day-5---expert) |
+| (*Striver's Array Series - Day5 - Expert*) | Three Sum | [LeetCode](https://leetcode.com/problems/3sum/description/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day5-Expert.md/#question-34--three-sum) |
 <!-- |  |  | [LeetCode]() | [Notes]() | -->
 
 > 💡 **Tip**: Click on Notes to see detailed notes for a particular question. 
