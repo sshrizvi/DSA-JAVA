@@ -17,6 +17,14 @@
     - [Dry Run 🏃‍♂️](#dry-run-️)
     - [Flowchart 🗺️](#flowchart-️)
     - [Complexity Analysis 🧮](#complexity-analysis-)
+  - [Question 36 : Missing and Repeating](#question-36--missing-and-repeating)
+    - [Intuition and Approach 🚀](#intuition-and-approach-)
+    - [Steps to Approach 🔍](#steps-to-approach-)
+    - [Detailed Walkthrough 📝](#detailed-walkthrough-)
+    - [Dry Run Example 🌧️](#dry-run-example-️)
+    - [Code with Explanations 🧑‍💻](#code-with-explanations-)
+    - [Flowchart 📊](#flowchart-)
+    - [Complexity Analysis 📈](#complexity-analysis--1)
 
 ## Question 34 : [Three Sum](https://leetcode.com/problems/3sum/description/)
 
@@ -238,6 +246,121 @@ flowchart TD
 > [!IMPORTANT]
 > - Article Link for the solution [Link](https://takeuforward.org/data-structure/4-sum-find-quads-that-add-up-to-a-target-value/)
 > - Video Link for the solution [Link](https://youtu.be/eD95WRfh81c)
+
+
+## Question 36 : [Missing and Repeating](https://www.geeksforgeeks.org/problems/find-missing-and-repeating2512/1)
+
+### Intuition and Approach 🚀
+The problem is to find one repeating number and one missing number in an array containing numbers from 1 to n. We can solve this problem using mathematical properties of sums and sums of squares.
+
+### Steps to Approach 🔍
+1. **Sum Calculation:**
+   - Calculate the sum of the first n natural numbers: $\text{actualSum} = \frac{n(n+1)}{2}$
+   - Calculate the sum of the squares of the first n natural numbers: $\text{actualSumOfSquares} = \frac{n(n+1)(2n+1)}{6}$
+   
+2. **Array Sum Calculation:**
+   - Calculate the sum of all elements in the array: `sum`
+   - Calculate the sum of the squares of all elements in the array: `sumOfSquares`
+   
+3. **Equations Setup:**
+   - Let $X$ be the repeating number and $Y$ be the missing number.
+   - From the sums, derive: $X - Y = \text{sum} - \text{actualSum}$ (Equation 1)
+   - From the sum of squares, derive: $X^2 - Y^2 = \text{sumOfSquares} - \text{actualSumOfSquares}$
+   - Use the identity $X^2 - Y^2 = (X + Y)(X - Y)$ to simplify: $X + Y = \frac{\text{sumOfSquares} - \text{actualSumOfSquares}}{X - Y}$ (Equation 2)
+
+4. **Solve for X and Y:**
+   - Using Equation 1 and Equation 2, solve for $X$ and $Y$.
+
+### Detailed Walkthrough 📝
+1. **Calculate Expected Sums:**
+   - `actualSum` = $\frac{n(n+1)}{2}$
+   - `actualSumOfSquares` = $\frac{n(n+1)(2n+1)}{6}$
+
+2. **Calculate Actual Sums from the Array:**
+   - Iterate through the array to compute `sum` and `sumOfSquares`.
+
+3. **Derive Differences:**
+   - `XminusY` = $\text{sum} - \text{actualSum}$
+   - `XplusY` = $\frac{\text{sumOfSquares} - \text{actualSumOfSquares}}{XminusY}$
+
+4. **Compute Missing and Repeating Numbers:**
+   - $X$ = $\frac{XplusY + XminusY}{2}$
+   - $Y$ = $X - XminusY$
+
+### Dry Run Example 🌧️
+Consider an example with `arr = [4, 3, 6, 2, 1, 1]` and `n = 6`.
+
+1. **Calculate Expected Values:**
+   - `actualSum` = $\frac{6 \cdot 7}{2} = 21$
+   - `actualSumOfSquares` = $\frac{6 \cdot 7 \cdot 13}{6} = 91$
+
+2. **Calculate Array Sums:**
+   - `sum` = 4 + 3 + 6 + 2 + 1 + 1 = 17
+   - `sumOfSquares` = $4^2 + 3^2 + 6^2 + 2^2 + 1^2 + 1^2 = 16 + 9 + 36 + 4 + 1 + 1 = 67$
+
+3. **Derive Differences:**
+   - `XminusY` = 17 - 21 = -4
+   - `XplusY` = $\frac{67 - 91}{-4} = \frac{-24}{-4} = 6$
+
+4. **Compute Missing and Repeating Numbers:**
+   - $X$ = $\frac{6 - 4}{2} = 1$ (Repeating number)
+   - $Y$ = $1 - (-4) = 5$ (Missing number)
+
+### Code with Explanations 🧑‍💻
+Here's the code annotated with comments:
+
+```java
+public static int[] findTwoElement2(int[] arr, int n) {
+    // Initialize variables for sums
+    long sum = 0;
+    long actualSum = (n * (n + 1L)) / 2;
+    long sumOfSquares = 0;
+    long actualSumOfSquares = (n * (n + 1L) * (2L * n + 1)) / 6;
+
+    // Calculate the sum and sum of squares of array elements
+    for (int i = 0; i < n; i++) {
+        sum += arr[i];
+        sumOfSquares += (long) arr[i] * arr[i];
+    }
+
+    // Calculate differences
+    long XminusY = sum - actualSum;
+    long XplusY = (sumOfSquares - actualSumOfSquares) / XminusY;
+
+    // Calculate repeating and missing numbers
+    long x = (XplusY + XminusY) / 2;
+    long y = x - XminusY;
+
+    // Return the result as an array
+    return new int[] {(int) x, (int) y};
+}
+```
+> [!NOTE]
+> To see full code, [click here](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/MissingAndRepeating.java)
+
+### Flowchart 📊
+```mermaid
+flowchart TD
+    A[Start] --> B[Initialize Variables]
+    B --> C[Calculate actualSum and actualSumOfSquares]
+    C --> D[Iterate through array and calculate sum and sumOfSquares]
+    D --> E[Calculate XminusY and XplusY]
+    E --> F[Compute x and y]
+    F --> G["Return [x, y]"]
+    G --> H[End]
+```
+
+### Complexity Analysis 📈
+- **Time Complexity:** $O(n)$
+  - Calculating sums involves iterating through the array once.
+- **Space Complexity:** $O(1)$
+  - Uses constant extra space for variables.
+
+By following this approach, we can efficiently determine the repeating and missing numbers in the array. The code is designed to handle large input sizes due to its $O(n)$ time complexity and constant space usage.
+
+> [!IMPORTANT]
+> - Article Link for the solution [Link](https://takeuforward.org/data-structure/find-the-repeating-and-missing-numbers/)
+> - Video Link for the solution [Link](https://youtu.be/2D0D8HE6uak)
 
 
 <!-- ## Question 00 : []()
