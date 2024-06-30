@@ -58,6 +58,7 @@ Hey, I am Syed Shujaat Haider and I am starting a new journey of learning DSA wi
 | (*Striver's Array Series - Day5 - Expert*) | Three Sum | [LeetCode](https://leetcode.com/problems/3sum/description/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day5-Expert.md/#question-34--three-sum) |
 |  | Four Sum | [LeetCode](https://leetcode.com/problems/4sum/description/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day5-Expert.md/#question-35--four-sum) |
 |  | Missing and Repeating | [GeeksForGeeks](https://www.geeksforgeeks.org/problems/find-missing-and-repeating2512/1) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day5-Expert.md/#question-36--missing-and-repeating) |
+|  | Maximum Produxt Subarray | [LeetCode](https://leetcode.com/problems/maximum-product-subarray/description/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day5-Expert.md/#question-37--maximum-product-subarray) |
 <!-- |  |  | [LeetCode]() | [Notes]() | -->
 
 > 💡 **Tip**: Click on Notes to see detailed notes for a particular question. 

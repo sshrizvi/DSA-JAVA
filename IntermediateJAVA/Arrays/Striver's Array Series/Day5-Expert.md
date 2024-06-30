@@ -25,6 +25,15 @@
     - [Code with Explanations 🧑‍💻](#code-with-explanations-)
     - [Flowchart 📊](#flowchart-)
     - [Complexity Analysis 📈](#complexity-analysis--1)
+  - [Question 37 : Maximum Product Subarray](#question-37--maximum-product-subarray)
+    - [Intuition 🌟](#intuition--1)
+    - [Approach 🚀](#approach--1)
+    - [Detailed Walkthrough 📝](#detailed-walkthrough--1)
+    - [Dry Run 🔍](#dry-run-)
+    - [Code 💻](#code--1)
+    - [Flowchart 📊](#flowchart--1)
+    - [Complexity Analysis 🧮](#complexity-analysis--2)
+    - [Final Thoughts 🌟](#final-thoughts-)
 
 ## Question 34 : [Three Sum](https://leetcode.com/problems/3sum/description/)
 
@@ -361,6 +370,137 @@ By following this approach, we can efficiently determine the repeating and missi
 > [!IMPORTANT]
 > - Article Link for the solution [Link](https://takeuforward.org/data-structure/find-the-repeating-and-missing-numbers/)
 > - Video Link for the solution [Link](https://youtu.be/2D0D8HE6uak)
+
+
+## Question 37 : [Maximum Product Subarray](https://leetcode.com/problems/maximum-product-subarray/description/)
+
+### Intuition 🌟
+
+The problem is to find the maximum product subarray in a given integer array `nums`. The main challenge is handling the sign changes caused by negative numbers and zeros. To handle this efficiently, we use both prefix and suffix products to ensure all potential subarrays are considered.
+
+### Approach 🚀
+
+1. **Prefix Product**: Calculate the product from the beginning of the array.
+2. **Suffix Product**: Calculate the product from the end of the array.
+3. **Reset Conditions**: Reset the prefix or suffix product to 1 if a zero is encountered, or if the product goes below `Integer.MIN_VALUE` to avoid overflow issues.
+4. **Track Maximum**: Track the maximum product encountered during the traversal.
+
+### Detailed Walkthrough 📝
+
+1. **Initialization**: 
+    - `max` to store the maximum product found, initialized to `Integer.MIN_VALUE`.
+    - `prefix` and `suffix` to store the products of elements from the start and end of the array, respectively.
+
+2. **Loop through the Array**:
+    - For each element in the array:
+      - Update the prefix product by multiplying with the current element.
+      - Update the suffix product by multiplying with the corresponding element from the end of the array.
+      - Check if the prefix or suffix product should be reset to 1 (when a zero is encountered or if it goes below `Integer.MIN_VALUE`).
+      - Update the maximum product found.
+
+3. **Return Result**:
+    - Cast the maximum product to `int` and return it.
+
+### Dry Run 🔍
+
+Let's perform a dry run of the code for the input array `nums = [2, 3, -2, 4]`.
+
+1. Initial State
+   - `max = Integer.MIN_VALUE`
+   - `prefix = 1`
+   - `suffix = 1`
+   - `n = 4`
+
+2. Iterations
+
+   1. Iteration 1 (`i = 0`)
+      - `prefix *= nums[0]` → `prefix = 1 * 2 = 2`
+      - `suffix *= nums[3]` → `suffix = 1 * 4 = 4`
+      - `max = Math.max(max, Math.max(prefix, suffix))`
+        - `max = Math.max(Integer.MIN_VALUE, Math.max(2, 4))`
+        - `max = 4`
+
+   2. Iteration 2 (`i = 1`)
+      - `prefix *= nums[1]` → `prefix = 2 * 3 = 6`
+      - `suffix *= nums[2]` → `suffix = 4 * -2 = -8`
+      - `max = Math.max(max, Math.max(prefix, suffix))`
+        - `max = Math.max(4, Math.max(6, -8))`
+        - `max = 6`
+
+   3. Iteration 3 (`i = 2`)
+      - `prefix *= nums[2]` → `prefix = 6 * -2 = -12`
+      - `suffix *= nums[1]` → `suffix = -8 * 3 = -24`
+      - `max = Math.max(max, Math.max(prefix, suffix))`
+        - `max = Math.max(6, Math.max(-12, -24))`
+        - `max = 6`
+
+   4. Iteration 4 (`i = 3`)
+      - `prefix *= nums[3]` → `prefix = -12 * 4 = -48`
+      - `suffix *= nums[0]` → `suffix = -24 * 2 = -48`
+      - `max = Math.max(max, Math.max(prefix, suffix))`
+        - `max = Math.max(6, Math.max(-48, -48))`
+        - `max = 6`
+
+3. Final Result
+   - `max = 6`
+   - Return `max` as the result.
+
+### Code 💻
+
+```java
+class Solution {
+    public int maxProduct(int[] nums) {
+        int n = nums.length;
+        long max = Integer.MIN_VALUE;
+        long prefix = 1, suffix = 1;
+        for(int i = 0; i < n; i++){
+            if(prefix == 0 || prefix < Integer.MIN_VALUE) prefix = 1;
+            if(suffix == 0 || suffix < Integer.MIN_VALUE) suffix = 1;
+            prefix *= nums[i];
+            suffix *= nums[n-i-1];
+            max = Math.max(max, Math.max(prefix, suffix));
+        }
+        return (int) max;
+    }
+}
+```
+> [!NOTE]
+> To see full code, [click here](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/MaximumProductSubarray.java)
+
+### Flowchart 📊
+
+Here's a flowchart to visualize the approach:
+
+```mermaid
+flowchart TD
+    A[Start] --> B[Initialize max, prefix, suffix]
+    B --> C[For each element i in nums]
+    C --> D[Update prefix]
+    C --> E[Update suffix]
+    D --> F{prefix == 0 or prefix < Integer.MIN_VALUE}
+    E --> G{suffix == 0 or suffix < Integer.MIN_VALUE}
+    F --> H[Reset prefix to 1]
+    G --> I[Reset suffix to 1]
+    H --> J[Calculate max]
+    I --> J
+    J --> K[Continue to next element]
+    K --> L{End of array?}
+    L --> M[Return max]
+    L --> C
+```
+
+### Complexity Analysis 🧮
+1. Time Complexity ⏱️
+   - The algorithm runs in $O(n)$ time, where n is the length of the array. This is because we iterate through the array once.
+2. Space Complexity 🗂️
+   - The space complexity is $O(1)$ because we only use a few extra variables (`max`, `prefix`, `suffix`), regardless of the input size.
+
+### Final Thoughts 🌟
+This approach ensures we efficiently find the maximum product subarray by considering both prefix and suffix products, handling zeros and negative numbers gracefully. By resetting the products when necessary and tracking the maximum product, we avoid overflow issues and achieve an optimal solution.
+
+> [!IMPORTANT]
+> - Article Link for the solution [Link](https://takeuforward.org/data-structure/maximum-product-subarray-in-an-array/)
+> - Video Link for the solution [Link](https://youtu.be/hnswaLJvr6g)
 
 
 <!-- ## Question 00 : []()
