@@ -9,6 +9,14 @@
     - [📊 Complexity Analysis](#-complexity-analysis)
     - [🔄 Flowchart](#-flowchart)
     - [✨ Summary](#-summary)
+  - [Question 35 : Four Sum](#question-35--four-sum)
+    - [Intuition 🌟](#intuition-)
+    - [Approach 🚀](#approach-)
+    - [Detailed Walkthrough 🛤️](#detailed-walkthrough-️)
+    - [Code 📝](#code-)
+    - [Dry Run 🏃‍♂️](#dry-run-️)
+    - [Flowchart 🗺️](#flowchart-️)
+    - [Complexity Analysis 🧮](#complexity-analysis-)
 
 ## Question 34 : [Three Sum](https://leetcode.com/problems/3sum/description/)
 
@@ -119,6 +127,117 @@ graph TD;
 > [!IMPORTANT]
 > - Article Link for the solution [Link](https://takeuforward.org/data-structure/3-sum-find-triplets-that-add-up-to-a-zero/)
 > - Video Link for the solution [Link](https://youtu.be/DhFh8Kw7ymk)
+
+
+## Question 35 : [Four Sum](https://leetcode.com/problems/4sum/description/)
+
+### Intuition 🌟
+The 4Sum problem aims to find all unique quadruplets in the array that sum up to a given target. Using sorting and the two-pointer technique helps efficiently narrow down potential candidates.
+
+### Approach 🚀
+1. **Sort the Array**: Sorting helps in easily skipping duplicates and applying the two-pointer technique.
+2. **Fix Two Numbers and Use Two-Pointer for the Remaining Two**: Iterate through each pair of numbers and use the two-pointer technique to find pairs that sum up to the remaining target.
+3. **Skip Duplicates**: Ensure that no duplicate quadruplets are added to the result.
+
+### Detailed Walkthrough 🛤️
+
+1. **Sort the Array**: Sorting the array in ascending order.
+2. **Outer Loop**: Iterate through the array to fix the first number.
+   - **Skip Duplicates**: Skip the current number if it's the same as the previous number.
+3. **Inner Loop**: Iterate through the remaining array to fix the second number.
+   - **Skip Duplicates**: Skip the current number if it's the same as the previous number.
+4. **Two-Pointer Technique**:
+   - Initialize two pointers, one starting right after the second number and the other at the end of the array.
+   - Calculate the sum of the four numbers.
+   - If the sum equals the target, add the quadruplet to the result and move both pointers inward while skipping duplicates.
+   - If the sum is less than the target, move the left pointer to the right to increase the sum.
+   - If the sum is greater than the target, move the right pointer to the left to decrease the sum.
+
+### Code 📝
+```java
+public static List<List<Integer>> fourSum(int[] nums, int target) {
+    List<List<Integer>> ans = new ArrayList<>();
+    Arrays.sort(nums);
+    for (int i = 0; i < nums.length - 3; i++) {
+        if (i > 0 && nums[i] == nums[i - 1]) continue;
+        for (int j = i + 1; j < nums.length - 2; j++) {
+            if (j > i + 1 && nums[j] == nums[j - 1]) continue;
+            int k = j + 1;
+            int l = nums.length - 1;
+            while (k < l) {
+                long sum = (long) nums[i] + nums[j] + nums[k] + nums[l];
+                if (sum == target) {
+                    ans.add(Arrays.asList(nums[i], nums[j], nums[k], nums[l]));
+                    k++;
+                    l--;
+                    while (k < l && nums[k] == nums[k - 1]) k++;
+                    while (k < l && nums[l] == nums[l + 1]) l--;
+                } else if (sum < target) {
+                    k++;
+                } else {
+                    l--;
+                }
+            }
+        }
+    }
+    return ans;
+}
+```
+> [!NOTE]
+> To see full code, [click here](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/FourSum.java)
+
+### Dry Run 🏃‍♂️
+**Input**: nums = [1, 0, -1, 0, -2, 2], target = 0
+1. **Sorted**: [-2, -1, 0, 0, 1, 2]
+2. **Iteration**:
+   - i = 0 (nums[i] = -2)
+     - j = 1 (nums[j] = -1)
+       - k = 2, l = 5
+         - sum = -2 + (-1) + 0 + 2 = -1 (k++)
+         - sum = -2 + (-1) + 0 + 2 = -1 (k++)
+         - sum = -2 + (-1) + 1 + 2 = 0 (found, move k and l)
+         - ...
+     - j = 2 (nums[j] = 0)
+       - ...
+
+### Flowchart 🗺️
+```mermaid
+flowchart TD
+    A[Start] --> B[Sort nums]
+    B --> C[Initialize ans list]
+    C --> D[Iterate i from 0 to nums.length-4]
+    D --> E{"Is nums[i] duplicate ?"}
+    E -- Yes --> D
+    E -- No --> F[Iterate j from i+1 to nums.length-3]
+    F --> G{"Is nums[j] duplicate ?"}
+    G -- Yes --> F
+    G -- No --> H[Initialize k=j+1 and l=nums.length-1]
+    H --> I{Is k < l?}
+    I -- No --> F
+    I -- Yes --> J["Calculate sum = nums[i]+nums[j]+nums[k]+nums[l]"]
+    J --> K{Is sum == target?}
+    K -- Yes --> L[Add to ans]
+    L --> M[Skip duplicates for k and l]
+    M --> N[Move k++, l--]
+    K -- No, sum < target --> O[Move k++]
+    K -- No, sum > target --> P[Move l--]
+    N --> I
+    O --> I
+    P --> I
+    F --> D
+    D --> Q[Return ans]
+```
+
+### Complexity Analysis 🧮
+- **Time Complexity**: $O(n^3)$
+  - Sorting takes $O(n log n)$.
+  - The three nested loops each contribute to $O(n)$ time complexity.
+- **Space Complexity**: $O(n)$
+  - The result list can store up to $O(n)$ quadruplets in the worst case.
+
+> [!IMPORTANT]
+> - Article Link for the solution [Link](https://takeuforward.org/data-structure/4-sum-find-quads-that-add-up-to-a-target-value/)
+> - Video Link for the solution [Link](https://youtu.be/eD95WRfh81c)
 
 
 <!-- ## Question 00 : []()
