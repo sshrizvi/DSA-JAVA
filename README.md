@@ -10,6 +10,7 @@ Hey, I am Syed Shujaat Haider and I am starting a new journey of learning DSA wi
   color: #ddd;
 ">
     <summary style="
+    cursor: pointer;
     font-weight: bold;
     color: #ddd;
   ">
