@@ -34,6 +34,17 @@
     - [Flowchart 📊](#flowchart--1)
     - [Complexity Analysis 🧮](#complexity-analysis--2)
     - [Final Thoughts 🌟](#final-thoughts-)
+  - [Question 38 : Merge Sort](#question-38--merge-sort)
+    - [📚 Intuition](#-intuition-1)
+    - [🛠️ Approach](#️-approach-1)
+    - [🚶 Detailed Walkthrough](#-detailed-walkthrough-1)
+      - [$merge()$ Function](#merge-function)
+      - [$mergeSort()$ Function](#mergesort-function)
+    - [📝 Dry Run](#-dry-run-1)
+      - [Recursive Breakdown](#recursive-breakdown)
+    - [📝 Code](#-code-1)
+    - [🔁 Flowchart](#-flowchart-1)
+    - [📈 Complexity Analysis](#-complexity-analysis-1)
 
 ## Question 34 : [Three Sum](https://leetcode.com/problems/3sum/description/)
 
@@ -501,6 +512,154 @@ This approach ensures we efficiently find the maximum product subarray by consid
 > [!IMPORTANT]
 > - Article Link for the solution [Link](https://takeuforward.org/data-structure/maximum-product-subarray-in-an-array/)
 > - Video Link for the solution [Link](https://youtu.be/hnswaLJvr6g)
+
+
+## Question 38 : [Merge Sort](https://www.geeksforgeeks.org/problems/merge-sort/1)
+
+### 📚 Intuition
+
+The `mergeSort` algorithm is a classic divide-and-conquer algorithm that recursively divides an array into smaller subarrays, sorts them, and then merges them back together in a sorted order. The merging process ensures that the final array is sorted.
+
+### 🛠️ Approach
+
+1. **Divide**: The array is divided into two halves until each subarray contains a single element.
+2. **Conquer**: Recursively sort the subarrays.
+3. **Combine**: Merge the sorted subarrays to produce the sorted array.
+
+### 🚶 Detailed Walkthrough
+
+#### $merge()$ Function
+
+The `merge` function takes two sorted subarrays and merges them into a single sorted array.
+
+1. **Initialization**:
+   - `i = l` (start of the first subarray)
+   - `j = m + 1` (start of the second subarray)
+   - `k = 0` (start of the temporary array `temp`)
+2. **Merging**:
+   - Compare elements from both subarrays and insert the smaller one into `temp`.
+   - Continue this until all elements from one subarray are exhausted.
+3. **Copy Remaining Elements**:
+   - Copy remaining elements from the first subarray (if any) to `temp`.
+   - Copy remaining elements from the second subarray (if any) to `temp`.
+4. **Copy Back to Original Array**:
+   - Copy all elements from `temp` back to the original array `arr`.
+
+#### $mergeSort()$ Function
+
+The `mergeSort` function recursively divides the array and sorts it.
+
+1. **Base Case**: If the subarray has one or no elements (`l >= r`), return.
+2. **Recursive Case**:
+   - Calculate the middle index `mid = (l + r) / 2`.
+   - Recursively sort the left half (`mergeSort(arr, l, mid)`).
+   - Recursively sort the right half (`mergeSort(arr, mid + 1, r)`).
+   - Merge the two halves using `merge(arr, l, mid, r)`.
+
+### 📝 Dry Run
+
+Let's dry run the code for an example array `arr = [38, 27, 43, 3, 9, 82, 10]`.
+
+**Initial Call**: `mergeSort(arr, 0, 6)`
+
+#### Recursive Breakdown
+
+1. **First Level**:
+   - `mergeSort(arr, 0, 3)`
+     - `mergeSort(arr, 0, 1)`
+       - `mergeSort(arr, 0, 0)` (base case)
+       - `mergeSort(arr, 1, 1)` (base case)
+       - `merge(arr, 0, 0, 1)` → `[27, 38]`
+     - `mergeSort(arr, 2, 3)`
+       - `mergeSort(arr, 2, 2)` (base case)
+       - `mergeSort(arr, 3, 3)` (base case)
+       - `merge(arr, 2, 2, 3)` → `[3, 43]`
+     - `merge(arr, 0, 1, 3)` → `[3, 27, 38, 43]`
+   - `mergeSort(arr, 4, 6)`
+     - `mergeSort(arr, 4, 5)`
+       - `mergeSort(arr, 4, 4)` (base case)
+       - `mergeSort(arr, 5, 5)` (base case)
+       - `merge(arr, 4, 4, 5)` → `[9, 82]`
+     - `mergeSort(arr, 6, 6)` (base case)
+     - `merge(arr, 4, 5, 6)` → `[9, 10, 82]`
+   - `merge(arr, 0, 3, 6)` → `[3, 9, 10, 27, 38, 43, 82]`
+
+### 📝 Code
+
+```java
+public static void merge(int arr[], int l, int m, int r) {
+    int i = l;
+    int j = m + 1;
+    int k = 0;
+    int[] temp = new int[r - l + 1];
+
+    while(i <= m && j <= r) {
+        if(arr[i] < arr[j]) temp[k++] = arr[i++];
+        else temp[k++] = arr[j++];
+    }
+    while(i <= m) temp[k++] = arr[i++];
+    while(j <= r) temp[k++] = arr[j++];
+
+    for(i = l; i <= r; i++) {
+        arr[i] = temp[i - l];
+    }
+}
+
+public static void mergeSort(int arr[], int l, int r) {
+    if(l >= r) return;
+    int mid = (l + r) / 2;
+    mergeSort(arr, l, mid);
+    mergeSort(arr, mid + 1, r);
+    merge(arr, l, mid, r);
+}
+```
+> [!NOTE]
+> To see full code, [click here](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/MergeSort.java)
+
+### 🔁 Flowchart
+
+Here's the flowchart in Mermaid code:
+
+```mermaid
+graph TD
+    A["mergeSort(arr, l, r)"] --> B{l >= r}
+    B -- Yes --> C[Return]
+    B -- No --> D["Calculate mid = (l + r) / 2"]
+    D --> E["mergeSort(arr, l, mid)"]
+    D --> F["mergeSort(arr, mid + 1, r)"]
+    E --> G["merge(arr, l, mid, r)"]
+    F --> G["merge(arr, l, mid, r)"]
+    G --> H[Return]
+
+    subgraph "merge(arr, l, m, r)"
+        I[Initialize i = l, j = m + 1, k = 0]
+        I --> J[Create temp array]
+        J --> K{"while(i <= m && j <= r)"}
+        K -- Yes --> L{"arr[i] < arr[j]"}
+        L -- Yes --> M["temp[k++] = arr[i++]"]
+        L -- No --> N["temp[k++] = arr[j++]"]
+        K -- No --> O{"while(i <= m)"}
+        O -- Yes --> P["temp[k++] = arr[i++]"]
+        O -- No --> Q{"while(j <= r)"}
+        Q -- Yes --> R["temp[k++] = arr[j++]"]
+        Q -- No --> S{"for(i = l; i <= r; i++)"}
+        S --> T["arr[i] = temp[i - l]"]
+        T --> U[Return]
+    end
+```
+
+### 📈 Complexity Analysis
+
+- **Time Complexity**: $O(n log n)$
+  - The array is divided into halves $log n$ times.
+  - Each level of recursion involves merging $n$ elements.
+- **Space Complexity**: $O(n)$
+  - Temporary array `temp` is used for merging.
+
+
+> [!IMPORTANT]
+> - Article Link for the solution [Link](https://takeuforward.org/data-structure/merge-sort-algorithm/)
+> - Video Link for the solution [Link](https://youtu.be/ogjf7ORKfd8)
 
 
 <!-- ## Question 00 : []()
