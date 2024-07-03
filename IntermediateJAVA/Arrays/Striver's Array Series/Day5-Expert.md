@@ -52,6 +52,13 @@
     - [Dry Run 🧪](#dry-run--1)
     - [Flowchart 📈](#flowchart--2)
     - [Complexity Analysis 📊](#complexity-analysis--3)
+  - [Question 40 : Reverse Pairs](#question-40--reverse-pairs)
+    - [Intuition and Approach 🌟](#intuition-and-approach--2)
+    - [Detailed Walkthrough 🛤️](#detailed-walkthrough-️-2)
+    - [Code Implementation 💻](#code-implementation--1)
+    - [Dry Run 🧪](#dry-run--2)
+    - [Flowchart 📈](#flowchart--3)
+    - [Complexity Analysis 📊](#complexity-analysis--4)
 
 ## Question 34 : [Three Sum](https://leetcode.com/problems/3sum/description/)
 
@@ -797,6 +804,143 @@ This approach efficiently counts the number of inversions in the array using the
 > [!IMPORTANT]
 > - Article Link for the solution [Link](https://takeuforward.org/data-structure/count-inversions-in-an-array/)
 > - Video Link for the solution [Link](https://youtu.be/AseUmwVNaoY)
+
+
+## Question 40 : [Reverse Pairs](https://leetcode.com/problems/reverse-pairs/description/)
+
+### Intuition and Approach 🌟
+
+The problem of counting reverse pairs in an array can be efficiently solved using a modified merge sort algorithm. A reverse pair is defined as a pair `(i, j)` such that `i < j` and `nums[i] > 2 * nums[j]`. The merge sort algorithm can be adapted to count these pairs during the merge process, similar to counting inversions.
+
+### Detailed Walkthrough 🛤️
+
+1. **Initialization**:
+   - Start with the entire array.
+   - Recursively split the array into two halves until each subarray contains a single element.
+
+2. **Main Logic for Counting Reverse Pairs**:
+   - Before merging the two halves, count the reverse pairs.
+   - For each element in the left half, count the number of elements in the right half that satisfy the condition `nums[i] > 2 * nums[j]`.
+
+3. **Merge Process**:
+   - Merge the two halves into a sorted array.
+
+4. **Combining Results**:
+   - The total reverse pair count is the sum of reverse pairs from the left half, the right half, and the reverse pairs counted during the merge process.
+
+### Code Implementation 💻
+
+```java
+public class Solution {
+    public static int reversePairs(int[] nums) {
+        return mergeSort(nums, 0, nums.length - 1);
+    }
+
+    public static int merge(int nums[], int l, int m, int r) {
+        int i = l;
+        int j = m + 1;
+        int k = 0;
+        int[] temp = new int[r - l + 1];
+        int rpCount = 0;
+
+        // Main Logic for Counting Reverse Pairs
+        while (i <= m) {
+            while (j <= r && nums[i] > (2 * (long) nums[j])) {
+                j++;
+            }
+            rpCount += (j - (m + 1));
+            i++;
+        }
+
+        // Merge Logic
+        i = l;
+        j = m + 1;
+        while (i <= m && j <= r) {
+            if (nums[i] <= nums[j]) temp[k++] = nums[i++];
+            else temp[k++] = nums[j++];
+        }
+        while (i <= m) temp[k++] = nums[i++];
+        while (j <= r) temp[k++] = nums[j++];
+
+        for (i = l; i <= r; i++) {
+            nums[i] = temp[i - l];
+        }
+
+        return rpCount;
+    }
+
+    public static int mergeSort(int nums[], int l, int r) {
+        int rpCount = 0;
+        if (l < r) {
+            int mid = (l + r) / 2;
+            rpCount += mergeSort(nums, l, mid);
+            rpCount += mergeSort(nums, mid + 1, r);
+            rpCount += merge(nums, l, mid, r);
+        }
+        return rpCount;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {1, 3, 2, 3, 1};
+        System.out.println("Reverse Pairs: " + reversePairs(nums)); // Output should be 2
+    }
+}
+```
+> [!NOTE]
+> To see full code, [click here](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/ReversePairs.java)
+
+### Dry Run 🧪
+
+For the array `[1, 3, 2, 3, 1]`:
+
+1. **Initial Split**:
+   - Left: `[1, 3, 2]`
+   - Right: `[3, 1]`
+
+2. **Further Splitting and Counting Reverse Pairs**:
+   - Split `[1, 3, 2]` to `[1, 3]` and `[2]`
+   - Split `[3, 1]` to `[3]` and `[1]`
+
+3. **Counting Reverse Pairs During Merge**:
+   - Merge `[1, 3]`:
+     - No reverse pairs.
+   - Merge `[1, 3, 2]`:
+     - Reverse pair: `(3, 2)`
+   - Merge `[3, 1]`:
+     - Reverse pair: `(3, 1)`
+   - Merge `[1, 3, 2, 3, 1]`:
+     - Reverse pairs: `(3, 1)`, `(2, 1)`
+
+Total reverse pairs counted correctly during the merge process should sum up to the expected result.
+
+### Flowchart 📈
+
+```mermaid
+graph TD
+A[Start] --> B[Initialize: l = 0, r = nums.length-1]
+B --> C{l < r}
+C -- Yes --> D["Calculate mid: (l+r)/2"]
+D --> E["Recursively sort left: mergeSort(nums, l, mid)"]
+E --> F["Recursively sort right: mergeSort(nums, mid+1, r)"]
+F --> G["Count reverse pairs: merge(nums, l, mid, r)"]
+G --> C
+C -- No --> H[Return total reverse pairs]
+```
+
+### Complexity Analysis 📊
+
+- **Time Complexity**: $O(n \log n)$
+  - The array is divided into two halves recursively $O(\log n)$.
+  - Counting reverse pairs and merging process takes linear time $O(n)$.
+
+- **Space Complexity**: $O(n)$
+  - Additional space is required for the temporary array used in the merge process.
+
+This approach efficiently counts the number of reverse pairs in the array using the divide-and-conquer paradigm of merge sort.
+
+> [!IMPORTANT]
+> - Article Link for the solution [Link](https://takeuforward.org/data-structure/count-reverse-pairs/)
+> - Video Link for the solution [Link](https://youtu.be/0e4bZaP3MDI)
 
 
 <!-- ## Question 00 : []()

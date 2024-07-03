@@ -61,6 +61,7 @@ Hey, I am Syed Shujaat Haider and I am starting a new journey of learning DSA wi
 |  | Maximum Produxt Subarray | [LeetCode](https://leetcode.com/problems/maximum-product-subarray/description/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day5-Expert.md/#question-37--maximum-product-subarray) |
 |  | Merge Sort | [GeeksForGeeks](https://www.geeksforgeeks.org/problems/merge-sort/1) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day5-Expert.md/#question-38--merge-sort) |
 |  | Count Inversions | [GeeksForGeeks](https://www.geeksforgeeks.org/problems/inversion-of-array-1587115620/1) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day5-Expert.md/#question-39--count-inversions) |
+|  | Reverse Pairs | [LeetCode](https://leetcode.com/problems/reverse-pairs/description/) | [Notes](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/Day5-Expert.md/#question-40--reverse-pairs) |
 <!-- |  |  | [LeetCode]() | [Notes]() | -->
 
 > 💡 **Tip**: Click on Notes to see detailed notes for a particular question. 
