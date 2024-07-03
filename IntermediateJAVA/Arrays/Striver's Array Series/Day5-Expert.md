@@ -45,6 +45,13 @@
     - [📝 Code](#-code-1)
     - [🔁 Flowchart](#-flowchart-1)
     - [📈 Complexity Analysis](#-complexity-analysis-1)
+  - [Question 39 : Count Inversions](#question-39--count-inversions)
+    - [Intuition and Approach 🌟](#intuition-and-approach--1)
+    - [Detailed Walkthrough 🛤️](#detailed-walkthrough-️-1)
+    - [Code Implementation 💻](#code-implementation-)
+    - [Dry Run 🧪](#dry-run--1)
+    - [Flowchart 📈](#flowchart--2)
+    - [Complexity Analysis 📊](#complexity-analysis--3)
 
 ## Question 34 : [Three Sum](https://leetcode.com/problems/3sum/description/)
 
@@ -660,6 +667,136 @@ graph TD
 > [!IMPORTANT]
 > - Article Link for the solution [Link](https://takeuforward.org/data-structure/merge-sort-algorithm/)
 > - Video Link for the solution [Link](https://youtu.be/ogjf7ORKfd8)
+
+
+## Question 39 : [Count Inversions](https://www.geeksforgeeks.org/problems/inversion-of-array-1587115620/1)
+
+### Intuition and Approach 🌟
+
+The problem of counting inversions in an array can be efficiently solved using a modified merge sort algorithm. The key idea is to count inversions while merging the two halves of the array. An inversion is counted when an element from the right half of the array is smaller than an element from the left half, as this means that all remaining elements in the left half will form inversions with the current element from the right half.
+
+### Detailed Walkthrough 🛤️
+
+1. **Initialization**: 
+    - Start with the entire array.
+    - Recursively split the array into two halves until each subarray contains a single element.
+
+2. **Merge Process**:
+    - While merging two halves, count the inversions.
+    - If an element from the right half (`arr[j]`) is smaller than an element from the left half (`arr[i]`), then it forms an inversion with all remaining elements in the left half.
+
+3. **Combining Results**:
+    - The total inversion count is the sum of inversions from the left half, the right half, and the inversions counted during the merge process.
+
+### Code Implementation 💻
+
+```java
+public class Solution {
+    public static long inversionCount(long arr[], int n) {
+        return mergeSort(arr, 0, n - 1);
+    }
+
+    public static long merge(long arr[], int l, int m, int r) {
+        int i = l;
+        int j = m + 1;
+        int k = 0;
+        long[] temp = new long[r - l + 1];
+        long inversions = 0;
+
+        while (i <= m && j <= r) {
+            if (arr[i] <= arr[j]) {
+                temp[k++] = arr[i++];
+            } else {
+                temp[k++] = arr[j++];
+                inversions += (m - i + 1); // Counting inversions
+            }
+        }
+        while (i <= m) temp[k++] = arr[i++];
+        while (j <= r) temp[k++] = arr[j++];
+
+        for (i = l; i <= r; i++) {
+            arr[i] = temp[i - l];
+        }
+
+        return inversions;
+    }
+
+    public static long mergeSort(long arr[], int l, int r) {
+        long inversions = 0;
+        if (l < r) {
+            int mid = (l + r) / 2;
+            inversions += mergeSort(arr, l, mid);
+            inversions += mergeSort(arr, mid + 1, r);
+            inversions += merge(arr, l, mid, r);
+        }
+        return inversions;
+    }
+
+    public static void main(String[] args) {
+        long[] arr = {57, 38, 91, 10, 38, 28, 79, 41};
+        System.out.println("Inversions: " + inversionCount(arr, arr.length));
+    }
+}
+```
+
+> [!NOTE]
+> To see full code, [click here](/IntermediateJAVA/Arrays/Striver's%20Array%20Series/CountInversions.java)
+
+### Dry Run 🧪
+
+For the array `[57, 38, 91, 10, 38, 28, 79, 41]`:
+
+1. **Initial Split**:
+   - Left: `[57, 38, 91, 10]`
+   - Right: `[38, 28, 79, 41]`
+
+2. **Further Splitting and Merging**:
+   - Split `[57, 38, 91, 10]` to `[57, 38]` and `[91, 10]`
+   - Split `[38, 28, 79, 41]` to `[38, 28]` and `[79, 41]`
+
+3. **Counting Inversions During Merge**:
+   - Merge `[57, 38]`: Inversions: `(57, 38)`
+   - Merge `[91, 10]`: Inversions: `(91, 10)`
+   - Merge `[57, 38, 91, 10]`: Inversions: `(57, 10)`, `(38, 10)`, `(91, 10)`
+
+   - Merge `[38, 28]`: Inversions: `(38, 28)`
+   - Merge `[79, 41]`: Inversions: `(79, 41)`
+   - Merge `[38, 28, 79, 41]`: Inversions: `(38, 28)`, `(79, 41)`
+
+4. **Final Merge**:
+   - Merge `[57, 38, 91, 10, 38, 28, 79, 41]`:
+     - Inversions: `(57, 28)`, `(57, 38)`, `(57, 41)`, `(38, 28)`, `(38, 28)`, `(91, 10)`, `(91, 28)`, `(91, 38)`, `(91, 41)`
+
+Total inversions counted correctly during the merge process should sum up to the expected result.
+
+### Flowchart 📈
+
+```mermaid
+graph TD
+A[Start] --> B[Initialize: l = 0, r = n-1]
+B --> C{l < r}
+C -- Yes --> D["Calculate mid: (l+r)/2"]
+D --> E["Recursively sort left: mergeSort(arr, l, mid)"]
+E --> F["Recursively sort right: mergeSort(arr, mid+1, r)"]
+F --> G["Merge and count inversions: merge(arr, l, mid, r)"]
+G --> C
+C -- No --> H[Return total inversions]
+```
+
+### Complexity Analysis 📊
+
+- **Time Complexity**: $O(n \log n)$
+  - The array is divided into two halves recursively $O(\log n)$.
+  - Merging process takes linear time $O(n)$.
+
+- **Space Complexity**: $O(n)$
+  - Additional space is required for the temporary array used in the merge process.
+
+This approach efficiently counts the number of inversions in the array using the divide-and-conquer paradigm of merge sort.
+
+> [!IMPORTANT]
+> - Article Link for the solution [Link](https://takeuforward.org/data-structure/count-inversions-in-an-array/)
+> - Video Link for the solution [Link](https://youtu.be/AseUmwVNaoY)
 
 
 <!-- ## Question 00 : []()
